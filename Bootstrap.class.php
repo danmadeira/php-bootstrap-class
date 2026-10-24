@@ -10,7 +10,7 @@
  * Flexbox, Grid e CDN jsDelivr, sem dependências externas em PHP ou jQuery.
  *
  * @author Daniel Madeira
- * @version 1.0
+ * @version 2.0
  * @date 2026-10-24
  * @license MIT License (https://opensource.org/licenses/MIT)
  * @link https://github.com/danmadeira/php-bootstrap-class
@@ -58,6 +58,2721 @@ class Bootstrap
         }
         $span = '<span' . $id . $classe . '>' . $conteudo . '</span>';
         return $span;
+    }
+
+    /**
+     * Gera um elemento de bloco <div> genérico com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do elemento.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <div> formatada.
+     */
+    public function div($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $div = '<div' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</div>' . PHP_EOL;
+        return $div;
+    }
+
+    /**
+     * Gera um elemento semântico de seção <section> genérico com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno da seção.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <section> formatada.
+     */
+    public function section($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $section = '<section' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</section>' . PHP_EOL;
+        return $section;
+    }
+
+    /**
+     * Gera elementos de cabeçalho semânticos de <h1> a <h6> de acordo com o nível numérico especificado.
+     *
+     * @param int|string $nivel Nível hierárquico do cabeçalho (1 a 6). Se informado texto e o segundo parâmetro for numérico, os parâmetros são ajustados automaticamente.
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do título.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <h1..6> formatada.
+     */
+    public function h($nivel = 1, $conteudo = '', $id = '', $classe = '')
+    {
+        if (!is_numeric($nivel) && (is_numeric($conteudo) || empty($conteudo))) {
+            $temp = $nivel;
+            $nivel = !empty($conteudo) ? (int)$conteudo : 1;
+            $conteudo = $temp;
+        }
+
+        $nivel = max(1, min(6, (int)$nivel));
+        $tag = 'h' . $nivel;
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $h = '<' . $tag . $id . $classe . '>' . $conteudo . '</' . $tag . '>' . PHP_EOL;
+        return $h;
+    }
+
+    /**
+     * Gera uma régua horizontal divisória semântica <hr> com classes e identificador opcionais.
+     *
+     * @param string $classe Classes CSS adicionais para estilização da linha divisória (ex: 'my-4', 'dropdown-divider').
+     * @param string $id Atributo ID opcional do elemento.
+     * @return string Marcação HTML da tag <hr> formatada.
+     */
+    public function hr($classe = '', $id = '')
+    {
+        if (!empty($id) && !empty($classe)) {
+            if (!str_contains($classe, ' ') && (str_contains($id, ' ') || preg_match('/^(border|my-|mt-|mb-|mx-|py-|pt-|pb-|px-|dropdown-|text-|bg-|opacity-)/', $id))) {
+                $temp = $classe;
+                $classe = $id;
+                $id = $temp;
+            }
+        }
+        if (str_starts_with($classe, '#')) {
+            $temp = substr($classe, 1);
+            $classe = $id;
+            $id = $temp;
+        }
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+
+        $hr = '<hr' . $id . $classe . '>' . PHP_EOL;
+        return $hr;
+    }
+
+    /**
+     * Gera um elemento semântico de navegação <nav> genérico com classes estilizadas, identificador e acessibilidade (aria-label).
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno da navegação.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @param string $ariaLabel Atributo aria-label opcional para acessibilidade.
+     * @return string Marcação HTML da tag <nav> formatada.
+     */
+    public function nav($conteudo = '', $id = '', $classe = '', $ariaLabel = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (!empty($ariaLabel)) {
+            $ariaLabel = ' aria-label="' . $ariaLabel . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $nav = '<nav' . $id . $classe . $ariaLabel . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</nav>' . PHP_EOL;
+        return $nav;
+    }
+
+    /**
+     * Gera um elemento estrutural semântico <main> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML principal do elemento.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <main> formatada.
+     */
+    public function main($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $main = '<main' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</main>' . PHP_EOL;
+        return $main;
+    }
+
+    /**
+     * Gera um elemento semântico de cabeçalho <header> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do cabeçalho.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <header> formatada.
+     */
+    public function header($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $header = '<header' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</header>' . PHP_EOL;
+        return $header;
+    }
+
+    /**
+     * Gera um elemento semântico de rodapé <footer> genérico com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do rodapé.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <footer> formatada.
+     */
+    public function footer($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $footer = '<footer' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</footer>' . PHP_EOL;
+        return $footer;
+    }
+
+    /**
+     * Gera um elemento estrutural semântico lateral <aside> com classes estilizadas, identificador e acessibilidade (aria-label).
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do elemento lateral.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @param string $ariaLabel Atributo aria-label opcional para acessibilidade.
+     * @return string Marcação HTML da tag <aside> formatada.
+     */
+    public function aside($conteudo = '', $id = '', $classe = '', $ariaLabel = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (!empty($ariaLabel)) {
+            $ariaLabel = ' aria-label="' . $ariaLabel . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $aside = '<aside' . $id . $classe . $ariaLabel . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</aside>' . PHP_EOL;
+        return $aside;
+    }
+
+    /**
+     * Gera um elemento de código inline <code> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Fragmento de código ou texto interno.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <code> formatada.
+     */
+    public function code($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'bg-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<code' . $id . $classe . '>' . $conteudo . '</code>';
+    }
+
+    /**
+     * Gera um elemento <label> para formulários com vínculo de campo (for), classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Texto ou conteúdo HTML do rótulo.
+     * @param string $for Identificador do campo de formulário associado (atributo for).
+     * @param string $id Atributo ID opcional do rótulo.
+     * @param string $classe Classes CSS adicionais (ex: 'form-label', 'form-check-label').
+     * @return string Marcação HTML da tag <label> formatada.
+     */
+    public function label($conteudo = '', $for = '', $id = '', $classe = '')
+    {
+        if (!empty($for) && empty($classe) && (str_contains($for, ' ') || str_starts_with($for, 'form-') || str_starts_with($for, 'col-'))) {
+            $classe = $for;
+            $for = '';
+        }
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'form-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($for)) {
+            $for = ltrim($for, '#');
+            $for = ' for="' . $for . '"';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<label' . $for . $id . $classe . '>' . $conteudo . '</label>';
+    }
+
+    /**
+     * Gera um link de hipertexto <a> com destino (href), conteúdo, classes estilizadas, identificador e destino de navegação (target).
+     *
+     * @param string $href URL de destino ou âncora do link.
+     * @param string|array $conteudo Texto ou conteúdo HTML interno do link. Se omitido, utiliza a própria URL.
+     * @param string $id Atributo ID opcional do link.
+     * @param string $classe Classes CSS adicionais (ex: 'text-decoration-none', 'btn btn-primary').
+     * @param string $target Destino da navegação (ex: '_blank', '_self', '_parent', '_top').
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'data-bs-toggle="modal"' ou array associativo).
+     * @return string Marcação HTML da tag <a> formatada.
+     */
+    public function a($href = '#', $conteudo = '', $id = '', $classe = '', $target = '', $atributos = '')
+    {
+        // Se os parâmetros foram invertidos ($conteudo como primeiro argumento e $href como segundo)
+        if (!empty($conteudo) && (str_starts_with($conteudo, '#') || str_starts_with($conteudo, 'http://') || str_starts_with($conteudo, 'https://') || str_starts_with($conteudo, '/') || str_starts_with($conteudo, 'mailto:')) && !str_starts_with($href, '#') && !str_starts_with($href, 'http://') && !str_starts_with($href, 'https://') && !str_starts_with($href, '/') && !str_starts_with($href, 'mailto:')) {
+            $temp = $href;
+            $href = $conteudo;
+            $conteudo = $temp;
+        }
+
+        if ($conteudo === '' || $conteudo === null) {
+            $conteudo = $href;
+        }
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'btn') || str_starts_with($id, 'text-') || str_starts_with($id, 'link-'))) {
+            $classe = $id;
+            $id = '';
+        }
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+
+        $attrTarget = '';
+        if (!empty($target)) {
+            $attrTarget = ' target="' . $target . '"';
+            if ($target === '_blank' && (empty($atributos) || (!is_array($atributos) && !str_contains($atributos, 'rel=')) || (is_array($atributos) && !isset($atributos['rel'])))) {
+                $attrTarget .= ' rel="noopener noreferrer"';
+            }
+        }
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<a href="' . $href . '"' . $id . $classe . $attrTarget . $extra . '>' . $conteudo . '</a>';
+    }
+
+    /**
+     * Gera um elemento de texto secundário/diminuído <small> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do elemento.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'text-muted', 'd-block').
+     * @return string Marcação HTML da tag <small> formatada.
+     */
+    public function small($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'd-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<small' . $id . $classe . '>' . $conteudo . '</small>';
+    }
+
+    /**
+     * Gera um elemento de texto pré-formatado <pre> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo de texto ou código pré-formatado.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'p-2 border rounded bg-body-tertiary small').
+     * @return string Marcação HTML da tag <pre> formatada.
+     */
+    public function pre($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'p-') || str_starts_with($id, 'border') || str_starts_with($id, 'bg-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<pre' . $id . $classe . '>' . $conteudo . '</pre>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um botão HTML <button> genérico com tipo, classes estilizadas, identificador e atributos adicionais.
+     *
+     * @param string|array $conteudo Rótulo, ícone ou conteúdo HTML interno do botão.
+     * @param string $tipo Tipo do botão ('button', 'submit' ou 'reset'). Se informado uma classe CSS, o tipo padrão 'button' é mantido.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS do botão (ex: 'btn btn-primary', 'btn btn-outline-warning').
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'data-bs-toggle="modal"' ou array associativo).
+     * @return string Marcação HTML da tag <button> formatada.
+     */
+    public function button($conteudo = '', $tipo = 'button', $id = '', $classe = '', $atributos = '')
+    {
+        // Se o segundo argumento for uma classe CSS em vez do tipo de botão
+        if (!in_array(strtolower($tipo), ['button', 'submit', 'reset']) && empty($classe)) {
+            $classe = $tipo;
+            $tipo = 'button';
+        }
+
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'btn'))) {
+            $classe = $id;
+            $id = '';
+        }
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<button type="' . htmlspecialchars($tipo) . '"' . $id . $classe . $extra . '>' . $conteudo . '</button>';
+    }
+
+    /**
+     * Gera um elemento de destaque em negrito <strong> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do elemento.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <strong> formatada.
+     */
+    public function strong($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<strong' . $id . $classe . '>' . $conteudo . '</strong>';
+    }
+
+    /**
+     * Gera uma ou mais quebras de linha <br> com classes e identificador opcionais.
+     *
+     * @param int|string $quantidade Quantidade de quebras de linha a gerar (padrão 1). Se fornecido texto, é interpretado como classe CSS.
+     * @param string $classe Classes CSS opcionais (ex: 'd-none d-md-block').
+     * @param string $id Atributo ID opcional.
+     * @return string Marcação HTML da tag <br>.
+     */
+    public function br($quantidade = 1, $classe = '', $id = '')
+    {
+        if (!is_numeric($quantidade)) {
+            $classe = (string)$quantidade;
+            $quantidade = 1;
+        }
+
+        $quantidade = max(1, (int)$quantidade);
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . $classe . '"';
+        }
+
+        $tag = '<br' . $id . $classe . '>';
+        if ($quantidade === 1) {
+            return $tag;
+        }
+
+        return str_repeat($tag, $quantidade);
+    }
+
+    /**
+     * Gera um bloco de citação <blockquote> estilizado com classes do Bootstrap e identificador opcional.
+     *
+     * @param string|array $conteudo Conteúdo textual ou elementos HTML internos da citação.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'blockquote').
+     * @return string Marcação HTML da tag <blockquote> formatada.
+     */
+    public function blockquote($conteudo = '', $id = '', $classe = 'blockquote')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $blockquote = '<blockquote' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</blockquote>' . PHP_EOL;
+        return $blockquote;
+    }
+
+    /**
+     * Gera uma legenda descritiva <figcaption> para figuras ou autoria de citações (blockquote-footer).
+     *
+     * @param string|array $conteudo Texto ou conteúdo HTML da legenda.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'blockquote-footer', 'figure-caption').
+     * @return string Marcação HTML da tag <figcaption> formatada.
+     */
+    public function figcaption($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'blockquote-') || str_starts_with($id, 'figure-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $figcaption = '<figcaption' . $id . $classe . '>' . $conteudo . '</figcaption>' . PHP_EOL;
+        return $figcaption;
+    }
+
+    /**
+     * Gera um elemento semântico de referência ou fonte <cite> com título e classes opcionais.
+     *
+     * @param string $conteudo Nome da obra, autor ou fonte citada.
+     * @param string $titulo Atributo title descritivo da fonte citada.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <cite> formatada.
+     */
+    public function cite($conteudo = '', $titulo = '', $id = '', $classe = '')
+    {
+        if (!empty($titulo) && empty($classe) && str_contains($titulo, ' ') && (str_starts_with($titulo, 'text-') || str_starts_with($titulo, 'fw-'))) {
+            $classe = $titulo;
+            $titulo = '';
+        }
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrTitle = !empty($titulo) ? ' title="' . htmlspecialchars($titulo) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        return '<cite' . $attrTitle . $id . $classe . '>' . $conteudo . '</cite>';
+    }
+
+    /**
+     * Gera um elemento de destaque em texto <mark> com classes e identificador opcionais.
+     *
+     * @param string|array $conteudo Texto ou conteúdo destacado.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <mark> formatada.
+     */
+    public function mark($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<mark' . $id . $classe . '>' . $conteudo . '</mark>';
+    }
+
+    /**
+     * Gera um elemento de entrada de teclado ou atalho <kbd> estilizado pelo Bootstrap.
+     *
+     * @param string|array $conteudo Tecla, atalho ou texto interno (ex: 'Ctrl', 'Alt + F4').
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <kbd> formatada.
+     */
+    public function kbd($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<kbd' . $id . $classe . '>' . $conteudo . '</kbd>';
+    }
+
+    /**
+     * Gera uma lista não ordenada <ul> com classes do Bootstrap (ex: .list-group, .list-unstyled, .list-inline).
+     *
+     * @param string|array $conteudo Itens da lista em HTML ou array de itens textuais/formatados.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'list-group', 'list-unstyled', 'list-inline').
+     * @return string Marcação HTML da tag <ul> formatada.
+     */
+    public function ul($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        $attrClasse = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+
+        if (is_array($conteudo)) {
+            $isListGroup = str_contains($classe, 'list-group');
+            $isListInline = str_contains($classe, 'list-inline');
+            $itens = [];
+            foreach ($conteudo as $item) {
+                if (str_starts_with(trim((string)$item), '<li')) {
+                    $itens[] = (string)$item;
+                } else {
+                    $itemClasse = $isListGroup ? 'list-group-item' : ($isListInline ? 'list-inline-item' : '');
+                    $itens[] = $this->li($item, classe: $itemClasse);
+                }
+            }
+            $conteudo = implode(PHP_EOL, $itens);
+        }
+
+        $ul = '<ul' . $id . $attrClasse . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</ul>' . PHP_EOL;
+        return $ul;
+    }
+
+    /**
+     * Gera uma lista ordenada <ol> com classes do Bootstrap (ex: .list-group, .breadcrumb, .list-group-numbered).
+     *
+     * @param string|array $conteudo Itens da lista em HTML ou array de itens textuais/formatados.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'list-group list-group-numbered', 'breadcrumb').
+     * @return string Marcação HTML da tag <ol> formatada.
+     */
+    public function ol($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        $attrClasse = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+
+        if (is_array($conteudo)) {
+            $isListGroup = str_contains($classe, 'list-group');
+            $isBreadcrumb = str_contains($classe, 'breadcrumb');
+            $itens = [];
+            foreach ($conteudo as $item) {
+                if (str_starts_with(trim((string)$item), '<li')) {
+                    $itens[] = (string)$item;
+                } else {
+                    $itemClasse = $isListGroup ? 'list-group-item' : ($isBreadcrumb ? 'breadcrumb-item' : '');
+                    $itens[] = $this->li($item, classe: $itemClasse);
+                }
+            }
+            $conteudo = implode(PHP_EOL, $itens);
+        }
+
+        $ol = '<ol' . $id . $attrClasse . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</ol>' . PHP_EOL;
+        return $ol;
+    }
+
+    /**
+     * Gera um item de lista <li> com classes contextuais (ex: .list-group-item, .active, .disabled).
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do item.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'list-group-item', 'breadcrumb-item').
+     * @param bool $ativo Se true, adiciona a classe .active e aria-current="true".
+     * @param bool $desativado Se true, adiciona a classe .disabled e aria-disabled="true".
+     * @return string Marcação HTML da tag <li> formatada.
+     */
+    public function li($conteudo = '', $id = '', $classe = '', $ativo = false, $desativado = false)
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'list-') || str_starts_with($id, 'page-') || str_starts_with($id, 'breadcrumb-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+
+        $classes = array_filter(explode(' ', trim($classe)));
+        $aria = '';
+        if ($ativo) {
+            $classes[] = 'active';
+            $aria .= ' aria-current="true"';
+        }
+        if ($desativado) {
+            $classes[] = 'disabled';
+            $aria .= ' aria-disabled="true"';
+        }
+
+        $classes = array_unique($classes);
+        $attrClasse = !empty($classes) ? ' class="' . implode(' ', $classes) . '"' : '';
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        return '<li' . $id . $attrClasse . $aria . '>' . $conteudo . '</li>';
+    }
+
+    /**
+     * Gera um elemento semântico <article> para matérias, posts de blog, notícias ou cards editoriais.
+     *
+     * @param string|array $conteudo Conteúdo textual ou elementos HTML internos do artigo.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <article> formatada.
+     */
+    public function article($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $article = '<article' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</article>' . PHP_EOL;
+        return $article;
+    }
+
+    /**
+     * Gera um elemento semântico de data e hora <time> com atributo datetime padronizado e classes utilitárias.
+     *
+     * @param string $conteudo Texto exibido da data/hora (ex: '24 de Outubro de 2026').
+     * @param string $datetime Valor legível por máquina (ex: '2026-10-24', '2026-10-24T14:30:00Z').
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'text-muted small').
+     * @return string Marcação HTML da tag <time> formatada.
+     */
+    public function time($conteudo = '', $datetime = '', $id = '', $classe = '')
+    {
+        if (!empty($datetime) && empty($classe) && (str_contains($datetime, ' ') || str_starts_with($datetime, 'text-') || str_starts_with($datetime, 'small'))) {
+            $classe = $datetime;
+            $datetime = '';
+        }
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrDatetime = !empty($datetime) ? ' datetime="' . htmlspecialchars($datetime) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        return '<time' . $attrDatetime . $id . $classe . '>' . $conteudo . '</time>';
+    }
+
+    /**
+     * Gera um formulário HTML <form> com método, ação, classes de validação do Bootstrap e atributos adicionais.
+     *
+     * @param string|array $conteudo Elementos internos do formulário (inputs, botões, grupos).
+     * @param string $action URL de destino da submissão (atributo action).
+     * @param string $method Método HTTP de envio ('GET' ou 'POST', padrão 'POST').
+     * @param string $id Atributo ID opcional do formulário.
+     * @param string $classe Classes CSS adicionais (ex: 'needs-validation', 'row g-3').
+     * @param string $enctype Tipo de codificação (ex: 'multipart/form-data').
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'novalidate' ou array associativo).
+     * @return string Marcação HTML da tag <form> formatada.
+     */
+    public function form($conteudo = '', $action = '', $method = 'POST', $id = '', $classe = '', $enctype = '', $atributos = '')
+    {
+        $attrAction = ' action="' . htmlspecialchars($action) . '"';
+        $attrMethod = ' method="' . htmlspecialchars(strtoupper($method ?: 'POST')) . '"';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrEnctype = !empty($enctype) ? ' enctype="' . htmlspecialchars($enctype) . '"' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $form = '<form' . $attrAction . $attrMethod . $id . $classe . $attrEnctype . $extra . '>' . PHP_EOL .
+                (!empty($conteudo) ? ($conteudo . PHP_EOL) : '') .
+                '</form>' . PHP_EOL;
+        return $form;
+    }
+
+    /**
+     * Gera um controle de seleção <select> nativo estilizado com a classe .form-select do Bootstrap 5.
+     *
+     * @param string $nome Atributo name do campo de seleção.
+     * @param array|string $opcoes Array associativo de opções [valor => rótulo] ou string de tags <option>.
+     * @param string|array $selecionado Valor ou valores da opção selecionada previamente.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'form-select').
+     * @param bool $multiplo Se true, permite múltipla seleção (adiciona multiple).
+     * @param bool $desativado Se true, desativa o campo com disabled.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <select> formatada.
+     */
+    public function select($nome = '', $opcoes = [], $selecionado = '', $id = '', $classe = 'form-select', $multiplo = false, $desativado = false, $atributos = '')
+    {
+        $attrName = !empty($nome) ? ' name="' . htmlspecialchars($nome) . ($multiplo && !str_ends_with($nome, '[]') ? '[]' : '') . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        } elseif (!empty($nome)) {
+            $id = ' id="' . htmlspecialchars($nome) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrMultiple = $multiplo ? ' multiple' : '';
+        $attrDisabled = $desativado ? ' disabled' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        $optionsHtml = '';
+        if (is_array($opcoes)) {
+            $valoresSelecionados = is_array($selecionado) ? array_map('strval', $selecionado) : [strval($selecionado)];
+            foreach ($opcoes as $val => $rotulo) {
+                $isSelected = in_array(strval($val), $valoresSelecionados, true) ? ' selected' : '';
+                $optionsHtml .= '    <option value="' . htmlspecialchars((string)$val) . '"' . $isSelected . '>' . htmlspecialchars((string)$rotulo) . '</option>' . PHP_EOL;
+            }
+        } else {
+            $optionsHtml = (string)$opcoes;
+        }
+
+        $select = '<select' . $attrName . $id . $classe . $attrMultiple . $attrDisabled . $extra . '>' . PHP_EOL .
+                  $optionsHtml .
+                  '</select>' . PHP_EOL;
+        return $select;
+    }
+
+    /**
+     * Gera um elemento de imagem <img> responsivo com classes do Bootstrap (padrão .img-fluid).
+     *
+     * @param string $src Caminho ou URL da imagem.
+     * @param string $alt Texto alternativo de acessibilidade (atributo alt).
+     * @param string $classe Classes CSS adicionais (padrão 'img-fluid', suporta 'img-thumbnail', 'rounded', 'rounded-circle').
+     * @param string $id Atributo ID opcional do elemento.
+     * @param int|string $largura Largura explícita em pixels (atributo width).
+     * @param int|string $altura Altura explícita em pixels (atributo height).
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'loading="lazy"').
+     * @return string Marcação HTML da tag <img> formatada.
+     */
+    public function img($src = '', $alt = '', $classe = 'img-fluid', $id = '', $largura = '', $altura = '', $atributos = '')
+    {
+        $attrSrc = ' src="' . htmlspecialchars($src) . '"';
+        $attrAlt = ' alt="' . htmlspecialchars($alt) . '"';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrWidth = !empty($largura) ? ' width="' . htmlspecialchars((string)$largura) . '"' : '';
+        $attrHeight = !empty($altura) ? ' height="' . htmlspecialchars((string)$altura) . '"' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<img' . $attrSrc . $attrAlt . $id . $classe . $attrWidth . $attrHeight . $extra . '>';
+    }
+
+    /**
+     * Gera um contêiner de figura <figure> com a classe padrão .figure do Bootstrap para ilustrações e fotos com legenda.
+     *
+     * @param string|array $conteudo Conteúdo interno da figura (imagens e figcaption).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'figure').
+     * @return string Marcação HTML da tag <figure> formatada.
+     */
+    public function figure($conteudo = '', $id = '', $classe = 'figure')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $figure = '<figure' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</figure>' . PHP_EOL;
+        return $figure;
+    }
+
+    /**
+     * Gera um elemento de tabela <table> com classes estilizadas do Bootstrap (padrão 'table').
+     *
+     * @param string|array $conteudo Conteúdo interno da tabela (thead, tbody, tfoot, caption).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'table', suporta 'table-striped', 'table-hover', 'table-bordered', etc.).
+     * @return string Marcação HTML da tag <table> formatada.
+     */
+    public function table($conteudo = '', $id = '', $classe = 'table')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $table = '<table' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</table>' . PHP_EOL;
+        return $table;
+    }
+
+    /**
+     * Gera o cabeçalho de uma tabela <thead> com classes estilizadas e identificador opcional.
+     *
+     * @param string|array $conteudo Linhas ou células internas do cabeçalho.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'table-light', 'table-dark', 'table-group-divider').
+     * @return string Marcação HTML da tag <thead> formatada.
+     */
+    public function thead($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $thead = '<thead' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</thead>' . PHP_EOL;
+        return $thead;
+    }
+
+    /**
+     * Gera o corpo principal de uma tabela <tbody> com classes contextuais e identificador opcional.
+     *
+     * @param string|array $conteudo Linhas de dados da tabela.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'table-group-divider').
+     * @return string Marcação HTML da tag <tbody> formatada.
+     */
+    public function tbody($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $tbody = '<tbody' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</tbody>' . PHP_EOL;
+        return $tbody;
+    }
+
+    /**
+     * Gera o rodapé de uma tabela <tfoot> para totais e sumários.
+     *
+     * @param string|array $conteudo Linhas ou células do rodapé da tabela.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <tfoot> formatada.
+     */
+    public function tfoot($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $tfoot = '<tfoot' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</tfoot>' . PHP_EOL;
+        return $tfoot;
+    }
+
+    /**
+     * Gera uma linha de tabela <tr> com suporte a variantes contextuais de cor do Bootstrap.
+     *
+     * @param string|array $conteudo Células th ou td internas da linha.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS contextuais (ex: 'table-primary', 'table-success', 'table-active', 'table-warning').
+     * @return string Marcação HTML da tag <tr> formatada.
+     */
+    public function tr($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $tr = '<tr' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</tr>' . PHP_EOL;
+        return $tr;
+    }
+
+    /**
+     * Gera uma célula de cabeçalho de tabela <th> com suporte a escopo (scope), mesclagem e classes.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do cabeçalho.
+     * @param string $scope Escopo da célula ('col', 'row', 'colgroup', 'rowgroup'). Se informado uma classe CSS, o escopo é desconsiderado.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @param int|string $colspan Quantidade de colunas mescladas (atributo colspan).
+     * @param int|string $rowspan Quantidade de linhas mescladas (atributo rowspan).
+     * @return string Marcação HTML da tag <th> formatada.
+     */
+    public function th($conteudo = '', $scope = '', $id = '', $classe = '', $colspan = '', $rowspan = '')
+    {
+        if (!in_array(strtolower((string)$scope), ['col', 'row', 'colgroup', 'rowgroup']) && !empty($scope) && empty($classe)) {
+            $classe = $scope;
+            $scope = '';
+        }
+
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+
+        $attrScope = !empty($scope) ? ' scope="' . htmlspecialchars((string)$scope) . '"' : '';
+        $attrColspan = !empty($colspan) ? ' colspan="' . htmlspecialchars((string)$colspan) . '"' : '';
+        $attrRowspan = !empty($rowspan) ? ' rowspan="' . htmlspecialchars((string)$rowspan) . '"' : '';
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        return '<th' . $attrScope . $attrColspan . $attrRowspan . $id . $classe . '>' . $conteudo . '</th>';
+    }
+
+    /**
+     * Gera uma célula de dados de tabela <td> com suporte a mesclagem, classes contextuais e identificador.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno da célula.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'table-active', 'text-end', 'align-middle').
+     * @param int|string $colspan Quantidade de colunas mescladas (atributo colspan).
+     * @param int|string $rowspan Quantidade de linhas mescladas (atributo rowspan).
+     * @return string Marcação HTML da tag <td> formatada.
+     */
+    public function td($conteudo = '', $id = '', $classe = '', $colspan = '', $rowspan = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-') || str_starts_with($id, 'text-') || str_starts_with($id, 'align-'))) {
+            $classe = $id;
+            $id = '';
+        }
+
+        $attrColspan = !empty($colspan) ? ' colspan="' . htmlspecialchars((string)$colspan) . '"' : '';
+        $attrRowspan = !empty($rowspan) ? ' rowspan="' . htmlspecialchars((string)$rowspan) . '"' : '';
+
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        return '<td' . $attrColspan . $attrRowspan . $id . $classe . '>' . $conteudo . '</td>';
+    }
+
+    /**
+     * Gera uma legenda ou título de tabela <caption> com suporte à classe .caption-top do Bootstrap.
+     *
+     * @param string|array $conteudo Texto ou conteúdo HTML da legenda da tabela.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'caption-top').
+     * @return string Marcação HTML da tag <caption> formatada.
+     */
+    public function caption($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'caption-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $caption = '<caption' . $id . $classe . '>' . $conteudo . '</caption>' . PHP_EOL;
+        return $caption;
+    }
+
+    /**
+     * Gera uma lista de descrição <dl> estilizada com o sistema de grade responsivo (padrão 'row').
+     *
+     * @param string|array $conteudo Elementos dt/dd em HTML ou array associativo de pares [Termo => Descrição].
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'row').
+     * @param int|string $colDt Largura da coluna para o termo <dt> (padrão 3).
+     * @param int|string $colDd Largura da coluna para a descrição <dd> (padrão 9).
+     * @return string Marcação HTML da tag <dl> formatada.
+     */
+    public function dl($conteudo = '', $id = '', $classe = 'row', $colDt = 3, $colDd = 9)
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+
+        if (is_array($conteudo)) {
+            $itens = [];
+            foreach ($conteudo as $termo => $descricao) {
+                $itens[] = $this->dt($termo, classe: 'col-sm-' . $colDt);
+                $itens[] = $this->dd($descricao, classe: 'col-sm-' . $colDd);
+            }
+            $conteudo = implode(PHP_EOL, $itens);
+        }
+
+        $dl = '<dl' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</dl>' . PHP_EOL;
+        return $dl;
+    }
+
+    /**
+     * Gera um termo de lista de descrição <dt> com suporte a classes de alinhamento e grade do Bootstrap.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno do termo.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'col-sm-3', 'text-truncate').
+     * @return string Marcação HTML da tag <dt> formatada.
+     */
+    public function dt($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'col-') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $dt = '<dt' . $id . $classe . '>' . $conteudo . '</dt>' . PHP_EOL;
+        return $dt;
+    }
+
+    /**
+     * Gera uma definição ou valor de lista de descrição <dd> com suporte a classes de grade do Bootstrap.
+     *
+     * @param string|array $conteudo Conteúdo textual ou HTML interno da descrição.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'col-sm-9').
+     * @return string Marcação HTML da tag <dd> formatada.
+     */
+    public function dd($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'col-') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $dd = '<dd' . $id . $classe . '>' . $conteudo . '</dd>' . PHP_EOL;
+        return $dd;
+    }
+
+    /**
+     * Gera uma área de texto multilinha <textarea> nativa com classe padrão .form-control do Bootstrap.
+     *
+     * @param string $nome Atributo name do campo.
+     * @param string $conteudo Conteúdo textual interno da área de texto.
+     * @param int|string $linhas Quantidade de linhas visíveis (atributo rows, padrão 3).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'form-control').
+     * @param int|string $colunas Quantidade de colunas (atributo cols opcional).
+     * @param string $placeholder Texto de dica placeholder.
+     * @param bool $desativado Se true, desativa o campo com disabled.
+     * @param bool $somenteLeitura Se true, define o campo como readonly.
+     * @param bool $requerido Se true, define o campo como required.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <textarea> formatada.
+     */
+    public function textarea($nome = '', $conteudo = '', $linhas = 3, $id = '', $classe = 'form-control', $colunas = '', $placeholder = '', $desativado = false, $somenteLeitura = false, $requerido = false, $atributos = '')
+    {
+        $attrName = !empty($nome) ? ' name="' . htmlspecialchars($nome) . '"' : '';
+        if (empty($id) && !empty($nome)) {
+            $id = $nome;
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrRows = !empty($linhas) ? ' rows="' . (int)$linhas . '"' : '';
+        $attrCols = !empty($colunas) ? ' cols="' . (int)$colunas . '"' : '';
+        $attrPlaceholder = !empty($placeholder) ? ' placeholder="' . htmlspecialchars($placeholder) . '"' : '';
+        $attrDisabled = $desativado ? ' disabled' : '';
+        $attrReadonly = $somenteLeitura ? ' readonly' : '';
+        $attrRequired = $requerido ? ' required' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<textarea' . $attrName . $id . $classe . $attrRows . $attrCols . $attrPlaceholder . $attrDisabled . $attrReadonly . $attrRequired . $extra . '>' . $conteudo . '</textarea>' . PHP_EOL;
+    }
+
+    /**
+     * Gera uma opção <option> para elementos de seleção <select>.
+     *
+     * @param string $valor Valor do atributo value da opção.
+     * @param string $rotulo Texto exibido da opção. Se omitido, utiliza o próprio valor.
+     * @param bool $selecionado Se true, marca a opção como selecionada (selected).
+     * @param bool $desativado Se true, desativa a opção (disabled).
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <option> formatada.
+     */
+    public function option($valor = '', $rotulo = '', $selecionado = false, $desativado = false, $classe = '', $atributos = '')
+    {
+        if ($rotulo === '' || $rotulo === null) {
+            $rotulo = $valor;
+        }
+        $attrValue = ' value="' . htmlspecialchars((string)$valor) . '"';
+        $attrSelected = $selecionado ? ' selected' : '';
+        $attrDisabled = $desativado ? ' disabled' : '';
+        $attrClasse = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valorAttr) {
+                if (is_bool($valorAttr)) {
+                    if ($valorAttr) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valorAttr) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<option' . $attrValue . $attrClasse . $attrSelected . $attrDisabled . $extra . '>' . htmlspecialchars((string)$rotulo) . '</option>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um agrupador hierárquico de opções <optgroup> para menus de seleção.
+     *
+     * @param string $rotulo Título do grupo de opções (atributo label).
+     * @param array|string $opcoes Array associativo de opções [valor => rótulo] ou string contendo tags <option>.
+     * @param bool $desativado Se true, desativa todo o grupo com disabled.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $selecionado Valor ou valores selecionados previamente.
+     * @return string Marcação HTML da tag <optgroup> formatada.
+     */
+    public function optgroup($rotulo = '', $opcoes = [], $desativado = false, $classe = '', $selecionado = '')
+    {
+        $attrLabel = ' label="' . htmlspecialchars($rotulo) . '"';
+        $attrDisabled = $desativado ? ' disabled' : '';
+        $attrClasse = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+
+        $optionsHtml = '';
+        if (is_array($opcoes)) {
+            $valoresSelecionados = is_array($selecionado) ? array_map('strval', $selecionado) : [strval($selecionado)];
+            foreach ($opcoes as $val => $texto) {
+                $isSelected = in_array(strval($val), $valoresSelecionados, true);
+                $optionsHtml .= '    ' . $this->option($val, $texto, $isSelected);
+            }
+        } else {
+            $optionsHtml = (string)$opcoes;
+        }
+
+        $optgroup = '<optgroup' . $attrLabel . $attrClasse . $attrDisabled . '>' . PHP_EOL .
+                    $optionsHtml .
+                    '</optgroup>' . PHP_EOL;
+        return $optgroup;
+    }
+
+    /**
+     * Gera um agrupamento de campos de formulário <fieldset> com suporte a desativação em lote e legenda.
+     *
+     * @param string|array $conteudo Conteúdo interno do fieldset (campos de formulário, botões).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'mb-3 border p-3 rounded').
+     * @param bool $desativado Se true, desativa todos os controles internos em lote com disabled.
+     * @param string $legenda Texto opcional para criação automática de tag <legend>.
+     * @return string Marcação HTML da tag <fieldset> formatada.
+     */
+    public function fieldset($conteudo = '', $id = '', $classe = '', $desativado = false, $legenda = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrDisabled = $desativado ? ' disabled' : '';
+
+        $legendaHtml = '';
+        if (!empty($legenda)) {
+            $legendaHtml = $this->legend($legenda);
+        }
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $fieldset = '<fieldset' . $id . $classe . $attrDisabled . '>' . PHP_EOL .
+                    (!empty($legendaHtml) ? ($legendaHtml . PHP_EOL) : '') .
+                    (!empty($conteudo) ? ($conteudo . PHP_EOL) : '') .
+                    '</fieldset>' . PHP_EOL;
+        return $fieldset;
+    }
+
+    /**
+     * Gera uma legenda descritiva <legend> para grupos de formulário <fieldset>.
+     *
+     * @param string|array $conteudo Texto ou conteúdo HTML da legenda.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (ex: 'col-form-label pt-0', 'float-none w-auto').
+     * @return string Marcação HTML da tag <legend> formatada.
+     */
+    public function legend($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'col-') || str_starts_with($id, 'float-') || str_starts_with($id, 'w-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $legend = '<legend' . $id . $classe . '>' . $conteudo . '</legend>' . PHP_EOL;
+        return $legend;
+    }
+
+    /**
+     * Gera uma lista de opções predefinidas <datalist> para autocompletar em campos <input list="...">.
+     *
+     * @param string $id Identificador ID obrigatório para vincular ao atributo list do input.
+     * @param array|string $opcoes Lista de opções (array [valor => rótulo] ou [valor1, valor2]) ou string de tags <option>.
+     * @param string $classe Classes CSS opcionais.
+     * @return string Marcação HTML da tag <datalist> formatada.
+     */
+    public function datalist($id = '', $opcoes = [], $classe = '')
+    {
+        $attrId = !empty($id) ? ' id="' . htmlspecialchars($id) . '"' : '';
+        $attrClasse = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+
+        $optionsHtml = '';
+        if (is_array($opcoes)) {
+            foreach ($opcoes as $chave => $valor) {
+                if (is_int($chave)) {
+                    $optionsHtml .= '    <option value="' . htmlspecialchars((string)$valor) . '"></option>' . PHP_EOL;
+                } else {
+                    $optionsHtml .= '    <option value="' . htmlspecialchars((string)$chave) . '">' . htmlspecialchars((string)$valor) . '</option>' . PHP_EOL;
+                }
+            }
+        } else {
+            $optionsHtml = (string)$opcoes;
+        }
+
+        $datalist = '<datalist' . $attrId . $attrClasse . '>' . PHP_EOL .
+                    $optionsHtml .
+                    '</datalist>' . PHP_EOL;
+        return $datalist;
+    }
+
+    /**
+     * Gera um quadro incorporado <iframe> compatível com o sistema de proporções (.ratio) do Bootstrap.
+     *
+     * @param string $src URL do documento ou mídia incorporada.
+     * @param string $titulo Título acessível de identificação do frame (atributo title).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @param int|string $largura Largura em pixels (atributo width).
+     * @param int|string $altura Altura em pixels (atributo height).
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'allowfullscreen', 'loading="lazy"').
+     * @return string Marcação HTML da tag <iframe> formatada.
+     */
+    public function iframe($src = '', $titulo = '', $id = '', $classe = '', $largura = '', $altura = '', $atributos = '')
+    {
+        $attrSrc = ' src="' . htmlspecialchars($src) . '"';
+        $attrTitle = !empty($titulo) ? ' title="' . htmlspecialchars($titulo) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $attrWidth = !empty($largura) ? ' width="' . htmlspecialchars((string)$largura) . '"' : '';
+        $attrHeight = !empty($altura) ? ' height="' . htmlspecialchars((string)$altura) . '"' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<iframe' . $attrSrc . $attrTitle . $id . $classe . $attrWidth . $attrHeight . $extra . '></iframe>';
+    }
+
+    /**
+     * Gera um player de vídeo HTML5 <video> com suporte a controles, poster e classes utilitárias do Bootstrap.
+     *
+     * @param string $src URL do arquivo de vídeo.
+     * @param string $poster URL da imagem de capa (poster).
+     * @param bool $controles Se true, exibe a barra de controles nativa (controls).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'w-100 rounded').
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'autoplay', 'muted', 'loop').
+     * @param string|array $conteudo Tags <source> filhas ou mensagem de fallback.
+     * @return string Marcação HTML da tag <video> formatada.
+     */
+    public function video($src = '', $poster = '', $controles = true, $id = '', $classe = 'w-100 rounded', $atributos = '', $conteudo = '')
+    {
+        $attrSrc = !empty($src) ? ' src="' . htmlspecialchars($src) . '"' : '';
+        $attrPoster = !empty($poster) ? ' poster="' . htmlspecialchars($poster) . '"' : '';
+        $attrControls = $controles ? ' controls' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $video = '<video' . $attrSrc . $attrPoster . $attrControls . $id . $classe . $extra . '>' . PHP_EOL .
+                 (!empty($conteudo) ? ($conteudo . PHP_EOL) : '') .
+                 '</video>' . PHP_EOL;
+        return $video;
+    }
+
+    /**
+     * Gera um player de áudio HTML5 <audio> com controles nativos e classes do Bootstrap.
+     *
+     * @param string $src URL do arquivo de áudio.
+     * @param bool $controles Se true, exibe a barra de controles nativa (controls).
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais (padrão 'w-100').
+     * @param string|array $atributos Atributos HTML adicionais (ex: 'autoplay', 'loop', 'muted').
+     * @param string|array $conteudo Tags <source> filhas ou mensagem de fallback.
+     * @return string Marcação HTML da tag <audio> formatada.
+     */
+    public function audio($src = '', $controles = true, $id = '', $classe = 'w-100', $atributos = '', $conteudo = '')
+    {
+        $attrSrc = !empty($src) ? ' src="' . htmlspecialchars($src) . '"' : '';
+        $attrControls = $controles ? ' controls' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . $chave;
+                    }
+                } else {
+                    $extra .= ' ' . $chave . '="' . htmlspecialchars((string)$valor) . '"';
+                }
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+
+        $audio = '<audio' . $attrSrc . $attrControls . $id . $classe . $extra . '>' . PHP_EOL .
+                 (!empty($conteudo) ? ($conteudo . PHP_EOL) : '') .
+                 '</audio>' . PHP_EOL;
+        return $audio;
+    }
+
+    /**
+     * Gera um contêiner de imagem responsiva avançada <picture> para Art Direction e formatos modernos (WebP/AVIF).
+     *
+     * @param string|array $conteudo Elementos <source> e elemento <img> final.
+     * @param string $id Atributo ID opcional do elemento.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <picture> formatada.
+     */
+    public function picture($conteudo = '', $id = '', $classe = '')
+    {
+        if (!empty($id) && empty($classe) && str_contains($id, ' ')) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        $picture = '<picture' . $id . $classe . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</picture>' . PHP_EOL;
+        return $picture;
+    }
+
+    /**
+     * Gera um elemento de fonte de mídia <source> para contêineres <picture>, <video> ou <audio>.
+     *
+     * @param string $srcset Conjunto de URLs de imagem (atributo srcset para picture).
+     * @param string $media Consulta de mídia CSS (atributo media, ex: '(min-width: 768px)').
+     * @param string $type Tipo MIME do formato da mídia (atributo type, ex: 'image/webp', 'video/mp4').
+     * @param string $src URL direta da fonte de mídia (atributo src para vídeo/áudio).
+     * @param string $id Atributo ID opcional.
+     * @param string $classe Classes CSS adicionais.
+     * @return string Marcação HTML da tag <source> formatada.
+     */
+    public function source($srcset = '', $media = '', $type = '', $src = '', $id = '', $classe = '')
+    {
+        $attrSrcset = !empty($srcset) ? ' srcset="' . htmlspecialchars($srcset) . '"' : '';
+        $attrMedia = !empty($media) ? ' media="' . htmlspecialchars($media) . '"' : '';
+        $attrType = !empty($type) ? ' type="' . htmlspecialchars($type) . '"' : '';
+        $attrSrc = !empty($src) ? ' src="' . htmlspecialchars($src) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . $id . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+
+        return '<source' . $attrSrcset . $attrMedia . $attrType . $attrSrc . $id . $classe . '>';
+    }
+
+    /**
+     * Gera um elemento inline <i> com suporte nativo a ícones (Bootstrap Icons) e estilo em itálico.
+     *
+     * @param string|array $conteudo Conteúdo textual ou elementos internos.
+     * @param string $id Atributo ID opcional ou classe CSS (ex: 'bi bi-star').
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais (ex: aria-hidden="true").
+     * @return string Marcação HTML da tag <i> formatada.
+     */
+    public function i($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'bi') || str_starts_with($id, 'fa') || str_starts_with($id, 'text-') || str_starts_with($id, 'fst-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<i' . $id . $classe . $extra . '>' . $conteudo . '</i>';
+    }
+
+    /**
+     * Gera um elemento semântico de abreviação <abbr> com suporte ao atributo title e classe .initialism do Bootstrap.
+     *
+     * @param string|array $conteudo Texto ou sigla a ser abreviada.
+     * @param string $titulo Significado por extenso (atributo title).
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'initialism').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <abbr> formatada.
+     */
+    public function abbr($conteudo = '', $titulo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || $id === 'initialism' || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrTitle = !empty($titulo) ? ' title="' . htmlspecialchars($titulo) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<abbr' . $attrTitle . $id . $classe . $extra . '>' . $conteudo . '</abbr>';
+    }
+
+    /**
+     * Gera um grupo estrutural de colunas <colgroup> para tabelas HTML.
+     *
+     * @param string|array $conteudo Elementos <col> internos ou marcação HTML.
+     * @param string $id Atributo ID opcional.
+     * @param string $classe Classes CSS adicionais.
+     * @param int|string $span Quantidade de colunas abrangidas (atributo span opcional).
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <colgroup> formatada.
+     */
+    public function colgroup($conteudo = '', $id = '', $classe = '', $span = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-') || str_starts_with($id, 'border'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrSpan = (!empty($span) || $span === '0' || $span === 0) ? ' span="' . (int)$span . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<colgroup' . $attrSpan . $id . $classe . $extra . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</colgroup>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um elemento de coluna <col> para formatação e dimensionamento em tabelas HTML.
+     *
+     * @param int|string $span Quantidade de colunas abrangidas (atributo span) ou classe CSS se não for numérico.
+     * @param string $id Atributo ID opcional ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'table-primary', 'w-25').
+     * @param string|array $atributos Atributos HTML adicionais (ex: style="width: 20%").
+     * @return string Marcação HTML da tag <col> formatada.
+     */
+    public function col($span = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($span) && !is_numeric($span) && empty($classe)) {
+            $classe = $span;
+            $span = '';
+        }
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'table-') || str_starts_with($id, 'w-') || str_starts_with($id, 'border') || str_starts_with($id, 'col-') || str_starts_with($id, 'bg-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrSpan = (!empty($span) || $span === '0' || $span === 0) ? ' span="' . (int)$span . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        return '<col' . $attrSpan . $id . $classe . $extra . '>';
+    }
+
+    /**
+     * Gera um elemento de faixa de texto e legendas <track> para mídias <video> e <audio>.
+     *
+     * @param string $src URL do arquivo de legenda ou faixa de tempo (.vtt).
+     * @param string $kind Tipo de faixa de texto (padrão 'subtitles', 'captions', 'descriptions', 'chapters', 'metadata').
+     * @param string $srclang Código do idioma da faixa (ex: 'pt-BR', 'en').
+     * @param string $label Rótulo legível para o usuário no seletor de faixas (ex: 'Português').
+     * @param bool $padrao Se true, marca a faixa como ativa por padrão (atributo default).
+     * @param string $id Atributo ID opcional.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <track> formatada.
+     */
+    public function track($src = '', $kind = 'subtitles', $srclang = '', $label = '', $padrao = false, $id = '', $classe = '', $atributos = '')
+    {
+        $attrSrc = !empty($src) ? ' src="' . htmlspecialchars($src) . '"' : '';
+        $attrKind = !empty($kind) ? ' kind="' . htmlspecialchars($kind) . '"' : '';
+        $attrSrclang = !empty($srclang) ? ' srclang="' . htmlspecialchars($srclang) . '"' : '';
+        $attrLabel = !empty($label) ? ' label="' . htmlspecialchars($label) . '"' : '';
+        $attrDefault = $padrao ? ' default' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        return '<track' . $attrSrc . $attrKind . $attrSrclang . $attrLabel . $attrDefault . $id . $classe . $extra . '>';
+    }
+
+    /**
+     * Gera um elemento de entrada nativo <input> flexível com suporte aos tipos e classes do Bootstrap 5.
+     *
+     * @param string $tipo Tipo do campo input (text, email, password, number, checkbox, radio, range, color, etc., padrão 'text').
+     * @param string $nome Atributo name do campo.
+     * @param mixed $valor Atributo value do campo.
+     * @param string $id Atributo ID opcional (se omitido e nome for fornecido, assume o valor do nome).
+     * @param string $classe Classes CSS do Bootstrap (padrão 'form-control', ajustado automaticamente para 'form-check-input', 'form-range' etc.).
+     * @param string $placeholder Texto de dica placeholder.
+     * @param bool $desativado Se true, desativa o campo com disabled.
+     * @param bool $somenteLeitura Se true, define o campo como readonly.
+     * @param bool $requerido Se true, define o campo como required.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <input> formatada.
+     */
+    public function input($tipo = 'text', $nome = '', $valor = '', $id = '', $classe = 'form-control', $placeholder = '', $desativado = false, $somenteLeitura = false, $requerido = false, $atributos = '')
+    {
+        if ($classe === 'form-control') {
+            if ($tipo === 'checkbox' || $tipo === 'radio') {
+                $classe = 'form-check-input';
+            } elseif ($tipo === 'range') {
+                $classe = 'form-range';
+            } elseif ($tipo === 'color') {
+                $classe = 'form-control form-control-color';
+            }
+        }
+        $attrType = ' type="' . htmlspecialchars($tipo) . '"';
+        $attrName = !empty($nome) ? ' name="' . htmlspecialchars($nome) . '"' : '';
+        if (empty($id) && !empty($nome) && $tipo !== 'radio') {
+            $id = $nome;
+        }
+        $attrId = !empty($id) ? ' id="' . htmlspecialchars($id) . '"' : '';
+        $attrValue = ($valor !== '' && $valor !== null) ? ' value="' . htmlspecialchars((string)$valor) . '"' : '';
+        $attrClass = !empty($classe) ? ' class="' . trim($classe) . '"' : '';
+        $attrPlaceholder = !empty($placeholder) ? ' placeholder="' . htmlspecialchars($placeholder) . '"' : '';
+        $attrDisabled = $desativado ? ' disabled' : '';
+        $attrReadonly = $somenteLeitura ? ' readonly' : '';
+        $attrRequired = $requerido ? ' required' : '';
+
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valorAttr) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valorAttr) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+
+        return '<input' . $attrType . $attrName . $attrValue . $attrId . $attrClass . $attrPlaceholder . $attrDisabled . $attrReadonly . $attrRequired . $extra . '>';
+    }
+
+    /**
+     * Gera um elemento de resultado/saída de formulário <output> para exibição de cálculos e valores dinâmicos.
+     *
+     * @param string|array $conteudo Conteúdo ou valor exibido na saída.
+     * @param string $for IDs dos elementos que geram o cálculo (atributo for, ex: 'campoA campoB').
+     * @param string $nome Atributo name do elemento.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'form-text', 'badge bg-primary').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <output> formatada.
+     */
+    public function output($conteudo = '', $for = '', $nome = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'form-') || str_starts_with($id, 'badge') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrFor = !empty($for) ? ' for="' . htmlspecialchars($for) . '"' : '';
+        $attrName = !empty($nome) ? ' name="' . htmlspecialchars($nome) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<output' . $attrFor . $attrName . $id . $classe . $extra . '>' . $conteudo . '</output>';
+    }
+
+    /**
+     * Gera um contêiner nativo de revelação/expansão <details> (alternativa leve a acordes sem JavaScript).
+     *
+     * @param string|array $conteudo Conteúdo interno, incluindo o elemento <summary>.
+     * @param bool $aberto Se true, mantém o contêiner aberto inicialmente (atributo open).
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <details> formatada.
+     */
+    public function details($conteudo = '', $aberto = false, $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'card') || str_starts_with($id, 'accordion') || str_starts_with($id, 'border'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrOpen = $aberto ? ' open' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<details' . $attrOpen . $id . $classe . $extra . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</details>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um cabeçalho/rótulo interativo <summary> para contêineres <details>.
+     *
+     * @param string|array $conteudo Texto ou marcação interna do cabeçalho.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'accordion-button', 'card-header').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <summary> formatada.
+     */
+    public function summary($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'btn') || str_starts_with($id, 'accordion-') || str_starts_with($id, 'card-') || str_starts_with($id, 'fw-') || str_starts_with($id, 'd-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<summary' . $id . $classe . $extra . '>' . $conteudo . '</summary>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um elemento semântico de informações de contato <address> formatado com as regras do Bootstrap Reboot.
+     *
+     * @param string|array $conteudo Conteúdo textual de endereço ou contatos.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-body-secondary', 'mb-3').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <address> formatada.
+     */
+    public function address($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'mb-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<address' . $id . $classe . $extra . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</address>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um elemento de ênfase tipográfica <em> com suporte a estilos contextuais do Bootstrap.
+     *
+     * @param string|array $conteudo Texto ou conteúdo com ênfase.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'fst-italic', 'text-primary').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <em> formatada.
+     */
+    public function em($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'fst-') || str_starts_with($id, 'text-') || str_starts_with($id, 'fw-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<em' . $id . $classe . $extra . '>' . $conteudo . '</em>';
+    }
+
+    /**
+     * Gera um elemento de destaque em negrito <b> editorial.
+     *
+     * @param string|array $conteudo Texto ou conteúdo em negrito.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <b> formatada.
+     */
+    public function b($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'fw-') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<b' . $id . $classe . $extra . '>' . $conteudo . '</b>';
+    }
+
+    /**
+     * Gera um elemento de texto subscrito <sub> com posicionamento normalizado pelo Bootstrap Reboot.
+     *
+     * @param string|array $conteudo Texto em índice subscrito.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <sub> formatada.
+     */
+    public function sub($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'small') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<sub' . $id . $classe . $extra . '>' . $conteudo . '</sub>';
+    }
+
+    /**
+     * Gera um elemento de texto sobrescrito <sup> com posicionamento normalizado pelo Bootstrap Reboot.
+     *
+     * @param string|array $conteudo Texto em expoente sobrescrito.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-primary', 'badge').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <sup> formatada.
+     */
+    public function sup($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'small') || str_starts_with($id, 'badge') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<sup' . $id . $classe . $extra . '>' . $conteudo . '</sup>';
+    }
+
+    /**
+     * Gera uma barra de progresso nativa <progress> compatível com utilitários de dimensões do Bootstrap.
+     *
+     * @param int|float|string $valor Valor atual de preenchimento (atributo value).
+     * @param int|float|string $maximo Valor máximo da escala (atributo max, padrão 100).
+     * @param string $conteudo Conteúdo textual de fallback (ex: '70%').
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'w-100').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <progress> formatada.
+     */
+    public function progress($valor = '', $maximo = 100, $conteudo = '', $id = '', $classe = 'w-100', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'w-') || str_starts_with($id, 'progress'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrValue = ($valor !== '' && $valor !== null) ? ' value="' . htmlspecialchars((string)$valor) . '"' : '';
+        $attrMax = (!empty($maximo) || $maximo === 0 || $maximo === '0') ? ' max="' . htmlspecialchars((string)$maximo) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $val) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($val) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        $fallback = !empty($conteudo) ? $conteudo : ($valor !== '' ? ($valor . '%') : '');
+        return '<progress' . $attrValue . $attrMax . $id . $classe . $extra . '>' . $fallback . '</progress>';
+    }
+
+    /**
+     * Gera um medidor escalar nativo <meter> para representação de valores fracionários dentro de limites.
+     *
+     * @param int|float|string $valor Valor numérico atual (atributo value).
+     * @param int|float|string $minimo Valor mínimo da escala (atributo min, padrão 0).
+     * @param int|float|string $maximo Valor máximo da escala (atributo max, padrão 100).
+     * @param int|float|string $baixo Limiar inferior de medição (atributo low opcional).
+     * @param int|float|string $alto Limiar superior de medição (atributo high opcional).
+     * @param int|float|string $otimo Ponto ótimo ideal da escala (atributo optimum opcional).
+     * @param string $conteudo Conteúdo textual de fallback (ex: '60%').
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'w-100').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <meter> formatada.
+     */
+    public function meter($valor = '', $minimo = 0, $maximo = 100, $baixo = '', $alto = '', $otimo = '', $conteudo = '', $id = '', $classe = 'w-100', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'w-') || str_starts_with($id, 'meter'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrValue = ($valor !== '' && $valor !== null) ? ' value="' . htmlspecialchars((string)$valor) . '"' : '';
+        $attrMin = ($minimo !== '' && $minimo !== null) ? ' min="' . htmlspecialchars((string)$minimo) . '"' : '';
+        $attrMax = ($maximo !== '' && $maximo !== null) ? ' max="' . htmlspecialchars((string)$maximo) . '"' : '';
+        $attrLow = ($baixo !== '' && $baixo !== null) ? ' low="' . htmlspecialchars((string)$baixo) . '"' : '';
+        $attrHigh = ($alto !== '' && $alto !== null) ? ' high="' . htmlspecialchars((string)$alto) . '"' : '';
+        $attrOptimum = ($otimo !== '' && $otimo !== null) ? ' optimum="' . htmlspecialchars((string)$otimo) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $val) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($val) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        $fallback = !empty($conteudo) ? $conteudo : ($valor !== '' ? ($valor . '%') : '');
+        return '<meter' . $attrValue . $attrMin . $attrMax . $attrLow . $attrHigh . $attrOptimum . $id . $classe . $extra . '>' . $fallback . '</meter>';
+    }
+
+    /**
+     * Gera uma caixa de diálogo nativa <dialog> (HTML5 Dialog) compatível com a API showModal() e classes do Bootstrap.
+     *
+     * @param string|array $conteudo Conteúdo interno da caixa de diálogo.
+     * @param bool $aberto Se true, mantém a caixa de diálogo aberta inicialmente (atributo open).
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'modal-content p-4 rounded-3 shadow-lg border-0').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <dialog> formatada.
+     */
+    public function dialog($conteudo = '', $aberto = false, $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'modal') || str_starts_with($id, 'p-') || str_starts_with($id, 'rounded') || str_starts_with($id, 'shadow') || str_starts_with($id, 'border'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrOpen = $aberto ? ' open' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<dialog' . $attrOpen . $id . $classe . $extra . '>' . (!empty($conteudo) ? (PHP_EOL . $conteudo . PHP_EOL) : '') . '</dialog>' . PHP_EOL;
+    }
+
+    /**
+     * Gera um elemento semântico de texto removido/tachado <del> com suporte aos atributos cite e datetime.
+     *
+     * @param string|array $conteudo Texto ou conteúdo tachado.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-muted', 'text-decoration-line-through').
+     * @param string $cite URL que explica a remoção (atributo cite opcional).
+     * @param string $datetime Data/hora da alteração (atributo datetime opcional).
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <del> formatada.
+     */
+    public function del($conteudo = '', $id = '', $classe = '', $cite = '', $datetime = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'small'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrCite = !empty($cite) ? ' cite="' . htmlspecialchars($cite) . '"' : '';
+        $attrDatetime = !empty($datetime) ? ' datetime="' . htmlspecialchars($datetime) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<del' . $attrCite . $attrDatetime . $id . $classe . $extra . '>' . $conteudo . '</del>';
+    }
+
+    /**
+     * Gera um elemento de texto tachado <s> (conteúdo que não é mais preciso ou relevante).
+     *
+     * @param string|array $conteudo Texto ou conteúdo tachado.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-muted', 'text-decoration-line-through').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <s> formatada.
+     */
+    public function s($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'small'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<s' . $id . $classe . $extra . '>' . $conteudo . '</s>';
+    }
+
+    /**
+     * Gera um elemento semântico de texto inserido/adicionado <ins> com suporte aos atributos cite e datetime.
+     *
+     * @param string|array $conteudo Texto ou conteúdo inserido.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-success', 'text-decoration-underline').
+     * @param string $cite URL que explica a adição (atributo cite opcional).
+     * @param string $datetime Data/hora da inserção (atributo datetime opcional).
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <ins> formatada.
+     */
+    public function ins($conteudo = '', $id = '', $classe = '', $cite = '', $datetime = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'small'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrCite = !empty($cite) ? ' cite="' . htmlspecialchars($cite) . '"' : '';
+        $attrDatetime = !empty($datetime) ? ' datetime="' . htmlspecialchars($datetime) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<ins' . $attrCite . $attrDatetime . $id . $classe . $extra . '>' . $conteudo . '</ins>';
+    }
+
+    /**
+     * Gera um elemento de texto sublinhado semântico <u> com suporte a utilitários de texto do Bootstrap.
+     *
+     * @param string|array $conteudo Texto ou conteúdo sublinhado.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'text-decoration-underline', 'text-primary').
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <u> formatada.
+     */
+    public function u($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'link-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<u' . $id . $classe . $extra . '>' . $conteudo . '</u>';
+    }
+
+    /**
+     * Gera um elemento semântico de saída de amostra de programa <samp> com tipografia monospace do Bootstrap.
+     *
+     * @param string|array $conteudo Amostra de saída de terminal ou código.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <samp> formatada.
+     */
+    public function samp($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'bg-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<samp' . $id . $classe . $extra . '>' . $conteudo . '</samp>';
+    }
+
+    /**
+     * Gera um elemento semântico de variável matemática ou de programação <var> com estilo normalizado pelo Reboot.
+     *
+     * @param string|array $conteudo Nome da variável ou símbolo matemático.
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <var> formatada.
+     */
+    public function var($conteudo = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'text-') || str_starts_with($id, 'fst-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<var' . $id . $classe . $extra . '>' . $conteudo . '</var>';
+    }
+
+    /**
+     * Gera um elemento de gráfico vetorial <svg> inline para ícones e elementos visuais do Bootstrap 5.
+     *
+     * @param string|array $conteudo Elementos internos SVG (path, circle, rect, use, etc.).
+     * @param int|string $largura Largura do SVG (atributo width, ex: 16 ou '1em') ou classe CSS se fornecido texto com classes.
+     * @param int|string $altura Altura do SVG (atributo height, ex: 16 ou '1em').
+     * @param string $viewBox Espaço de coordenadas do SVG (atributo viewBox, ex: '0 0 16 16').
+     * @param string $id Atributo ID opcional do elemento ou classe CSS.
+     * @param string $classe Classes CSS adicionais (ex: 'bi me-2', 'text-primary').
+     * @param string|array $atributos Atributos HTML adicionais (ex: fill="currentColor", role="img").
+     * @return string Marcação HTML da tag <svg> formatada.
+     */
+    public function svg($conteudo = '', $largura = '', $altura = '', $viewBox = '', $id = '', $classe = '', $atributos = '')
+    {
+        if (!empty($largura) && empty($classe) && (str_contains((string)$largura, ' ') || str_starts_with((string)$largura, 'bi') || str_starts_with((string)$largura, 'text-') || str_starts_with((string)$largura, 'w-'))) {
+            $classe = (string)$largura;
+            $largura = '';
+        }
+        if (!empty($id) && empty($classe) && (str_contains($id, ' ') || str_starts_with($id, 'bi') || str_starts_with($id, 'text-'))) {
+            $classe = $id;
+            $id = '';
+        }
+        $attrWidth = (!empty($largura) || $largura === 0 || $largura === '0') ? ' width="' . htmlspecialchars((string)$largura) . '"' : '';
+        $attrHeight = (!empty($altura) || $altura === 0 || $altura === '0') ? ' height="' . htmlspecialchars((string)$altura) . '"' : '';
+        $attrViewBox = !empty($viewBox) ? ' viewBox="' . htmlspecialchars($viewBox) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        if (is_array($conteudo)) {
+            $conteudo = implode(PHP_EOL, $conteudo);
+        }
+        return '<svg' . $attrWidth . $attrHeight . $attrViewBox . $id . $classe . $extra . '>' . $conteudo . '</svg>';
+    }
+
+    /**
+     * Gera um elemento de tela gráfica <canvas> para renderização de gráficos (Chart.js) e animações.
+     *
+     * @param string $id Identificador ID obrigatório/recomendado para seleção via JavaScript.
+     * @param int|string $largura Largura do canvas (atributo width ou classe CSS).
+     * @param int|string $altura Altura do canvas (atributo height).
+     * @param string $classe Classes CSS adicionais (ex: 'w-100', 'border rounded').
+     * @param string $conteudo Conteúdo textual de fallback para navegadores sem suporte a canvas.
+     * @param string|array $atributos Atributos HTML adicionais.
+     * @return string Marcação HTML da tag <canvas> formatada.
+     */
+    public function canvas($id = '', $largura = '', $altura = '', $classe = '', $conteudo = '', $atributos = '')
+    {
+        if (!empty($largura) && !is_numeric($largura) && empty($classe) && !str_ends_with((string)$largura, 'px') && !str_ends_with((string)$largura, '%')) {
+            $classe = (string)$largura;
+            $largura = '';
+        }
+        if (!empty($classe) && (is_numeric($classe) || str_ends_with((string)$classe, 'px') || str_ends_with((string)$classe, '%')) && empty($largura)) {
+            $largura = $classe;
+            $classe = '';
+        }
+        $attrWidth = (!empty($largura) || $largura === 0 || $largura === '0') ? ' width="' . htmlspecialchars((string)$largura) . '"' : '';
+        $attrHeight = (!empty($altura) || $altura === 0 || $altura === '0') ? ' height="' . htmlspecialchars((string)$altura) . '"' : '';
+        if (!empty($id)) {
+            $id = ' id="' . htmlspecialchars($id) . '"';
+        }
+        if (!empty($classe)) {
+            $classe = ' class="' . trim($classe) . '"';
+        }
+        $extra = '';
+        if (is_array($atributos)) {
+            foreach ($atributos as $chave => $valor) {
+                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+            }
+        } elseif (!empty($atributos)) {
+            $extra = ' ' . trim($atributos);
+        }
+        $fallback = !empty($conteudo) ? $conteudo : 'Seu navegador não suporta a tag canvas do HTML5.';
+        return '<canvas' . $id . $attrWidth . $attrHeight . $classe . $extra . '>' . $fallback . '</canvas>';
     }
 
     /**
