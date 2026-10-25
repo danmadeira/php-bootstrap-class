@@ -1,6 +1,6 @@
 <?php
 /**
- * PHP Bootstrap Class v2.0 - Demonstração Completa (Bootstrap 5.3.8)
+ * PHP Bootstrap Class v2.1 - Demonstração Completa (Bootstrap 5.3.8)
  *
  * Arquivo de demonstração interativo apresentando todos os 179 métodos públicos
  * da classe Bootstrap (DMetibr\Bootstrap), organizados por categorias funcionais.
@@ -48,58 +48,182 @@ $htmlHead = '<!DOCTYPE html>' . PHP_EOL .
     '<head>' . PHP_EOL .
     '    <meta charset="UTF-8">' . PHP_EOL .
     '    <meta name="viewport" content="width=device-width, initial-scale=1.0">' . PHP_EOL .
-    '    <title>PHP Bootstrap Class v2.0 - Demonstração Completa</title>' . PHP_EOL .
+    '    <title>PHP Bootstrap Class v2.1 - Demonstração Completa</title>' . PHP_EOL .
+    '    <link rel="preconnect" href="https://fonts.googleapis.com">' . PHP_EOL .
+    '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . PHP_EOL .
+    '    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">' . PHP_EOL .
     '    ' . $bs->tagCss() .
     '    ' . $bs->scriptThemeToggle() .
     '    <style>' . PHP_EOL .
+    '        :root {' . PHP_EOL .
+    '            --demo-accent: #0d6efd;' . PHP_EOL .
+    '            --demo-accent-2: #6610f2;' . PHP_EOL .
+    '            --demo-card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);' . PHP_EOL .
+    '            --demo-card-shadow-hover: 0 12px 28px -4px rgba(13, 110, 253, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        [data-bs-theme="dark"] {' . PHP_EOL .
+    '            --demo-card-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.35), 0 2px 8px -1px rgba(0, 0, 0, 0.25);' . PHP_EOL .
+    '            --demo-card-shadow-hover: 0 14px 32px -4px rgba(13, 110, 253, 0.22), 0 6px 16px -2px rgba(0, 0, 0, 0.45);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        html {' . PHP_EOL .
+    '            scroll-behavior: smooth;' . PHP_EOL .
+    '            scroll-padding-top: 90px;' . PHP_EOL .
+    '        }' . PHP_EOL .
     '        body {' . PHP_EOL .
-    '            padding-top: 70px;' . PHP_EOL .
+    '            font-family: "Inter", system-ui, -apple-system, sans-serif;' . PHP_EOL .
+    '            padding-top: 76px;' . PHP_EOL .
+    '            background-image:' . PHP_EOL .
+    '                radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.06) 0px, transparent 50%),' . PHP_EOL .
+    '                radial-gradient(at 100% 0%, rgba(102, 16, 242, 0.06) 0px, transparent 50%);' . PHP_EOL .
+    '            background-attachment: fixed;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        code, kbd, samp, pre, .method-badge {' . PHP_EOL .
+    '            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        #topo-navegacao .navbar {' . PHP_EOL .
+    '            background: linear-gradient(135deg, rgba(13, 110, 253, 0.92) 0%, rgba(79, 70, 229, 0.92) 100%) !important;' . PHP_EOL .
+    '            backdrop-filter: blur(14px);' . PHP_EOL .
+    '            -webkit-backdrop-filter: blur(14px);' . PHP_EOL .
+    '            box-shadow: 0 4px 24px rgba(13, 110, 253, 0.18);' . PHP_EOL .
+    '            border-bottom: 1px solid rgba(255, 255, 255, 0.12);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        #topo-navegacao .navbar-brand {' . PHP_EOL .
+    '            font-weight: 700;' . PHP_EOL .
+    '            letter-spacing: -0.02em;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        #jumbotron-hero {' . PHP_EOL .
+    '            position: relative;' . PHP_EOL .
+    '            overflow: hidden;' . PHP_EOL .
+    '            border-radius: 1.25rem !important;' . PHP_EOL .
+    '            border: 1px solid rgba(13, 110, 253, 0.2) !important;' . PHP_EOL .
+    '            background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(102, 16, 242, 0.06) 50%, var(--bs-tertiary-bg) 100%) !important;' . PHP_EOL .
+    '            box-shadow: var(--demo-card-shadow);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        #jumbotron-hero h1 {' . PHP_EOL .
+    '            letter-spacing: -0.03em;' . PHP_EOL .
+    '            background: linear-gradient(135deg, var(--bs-emphasis-color) 30%, #0d6efd 100%);' . PHP_EOL .
+    '            -webkit-background-clip: text;' . PHP_EOL .
+    '            -webkit-text-fill-color: transparent;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        #jumbotron-hero h1 .bi {' . PHP_EOL .
+    '            -webkit-text-fill-color: #ffc107;' . PHP_EOL .
+    '            filter: drop-shadow(0 2px 6px rgba(255, 193, 7, 0.4));' . PHP_EOL .
     '        }' . PHP_EOL .
     '        .demo-section {' . PHP_EOL .
-    '            padding-top: 30px;' . PHP_EOL .
-    '            margin-bottom: 40px;' . PHP_EOL .
-    '            border-bottom: 1px solid var(--bs-border-color);' . PHP_EOL .
-    '            padding-bottom: 30px;' . PHP_EOL .
+    '            padding-top: 28px;' . PHP_EOL .
+    '            margin-bottom: 44px;' . PHP_EOL .
+    '            border-bottom: 1px solid var(--bs-border-color-translucent);' . PHP_EOL .
+    '            padding-bottom: 32px;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .demo-section > h2 {' . PHP_EOL .
+    '            font-weight: 700;' . PHP_EOL .
+    '            letter-spacing: -0.02em;' . PHP_EOL .
+    '            padding-bottom: 0.65rem;' . PHP_EOL .
+    '            border-bottom: 2px solid rgba(13, 110, 253, 0.15);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .demo-section > h2 > .bi {' . PHP_EOL .
+    '            display: inline-flex;' . PHP_EOL .
+    '            align-items: center;' . PHP_EOL .
+    '            justify-content: center;' . PHP_EOL .
+    '            width: 2.15rem;' . PHP_EOL .
+    '            height: 2.15rem;' . PHP_EOL .
+    '            border-radius: 0.6rem;' . PHP_EOL .
+    '            background: linear-gradient(135deg, rgba(13, 110, 253, 0.15), rgba(102, 16, 242, 0.15));' . PHP_EOL .
+    '            color: var(--bs-primary);' . PHP_EOL .
+    '            font-size: 1.05rem;' . PHP_EOL .
     '        }' . PHP_EOL .
     '        .demo-box {' . PHP_EOL .
     '            background-color: var(--bs-body-bg);' . PHP_EOL .
-    '            border: 1px solid var(--bs-border-color);' . PHP_EOL .
-    '            border-radius: 0.5rem;' . PHP_EOL .
+    '            border: 1px solid var(--bs-border-color-translucent);' . PHP_EOL .
+    '            border-radius: 0.9rem;' . PHP_EOL .
     '            padding: 1.5rem;' . PHP_EOL .
     '            margin-bottom: 1.5rem;' . PHP_EOL .
-    '            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);' . PHP_EOL .
+    '            box-shadow: var(--demo-card-shadow);' . PHP_EOL .
+    '            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .demo-box:hover {' . PHP_EOL .
+    '            transform: translateY(-2px);' . PHP_EOL .
+    '            box-shadow: var(--demo-card-shadow-hover);' . PHP_EOL .
+    '            border-color: rgba(13, 110, 253, 0.28);' . PHP_EOL .
     '        }' . PHP_EOL .
     '        .demo-box-title {' . PHP_EOL .
-    '            font-size: 0.9rem;' . PHP_EOL .
+    '            font-size: 0.85rem;' . PHP_EOL .
+    '            font-weight: 700;' . PHP_EOL .
     '            text-transform: uppercase;' . PHP_EOL .
-    '            letter-spacing: 0.05em;' . PHP_EOL .
-    '            color: var(--bs-secondary-color);' . PHP_EOL .
-    '            margin-bottom: 1rem;' . PHP_EOL .
+    '            letter-spacing: 0.06em;' . PHP_EOL .
+    '            color: var(--bs-emphasis-color);' . PHP_EOL .
+    '            margin-bottom: 1.2rem;' . PHP_EOL .
+    '            padding-bottom: 0.75rem;' . PHP_EOL .
+    '            border-bottom: 1px dashed var(--bs-border-color);' . PHP_EOL .
     '            display: flex;' . PHP_EOL .
     '            flex-wrap: wrap;' . PHP_EOL .
     '            align-items: center;' . PHP_EOL .
     '            justify-content: space-between;' . PHP_EOL .
+    '            gap: 0.6rem;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .demo-box-title > span:first-child {' . PHP_EOL .
+    '            display: inline-flex;' . PHP_EOL .
+    '            align-items: center;' . PHP_EOL .
     '            gap: 0.5rem;' . PHP_EOL .
     '        }' . PHP_EOL .
-    '        .method-badge {' . PHP_EOL .
-    '            font-family: monospace;' . PHP_EOL .
-    '            font-size: 0.78rem;' . PHP_EOL .
+    '        .demo-box-title > span:first-child::before {' . PHP_EOL .
+    '            content: "";' . PHP_EOL .
+    '            display: inline-block;' . PHP_EOL .
+    '            width: 4px;' . PHP_EOL .
+    '            height: 1rem;' . PHP_EOL .
+    '            border-radius: 99px;' . PHP_EOL .
+    '            background: linear-gradient(180deg, #0d6efd, #6610f2);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .badge.method-badge {' . PHP_EOL .
+    '            font-size: 0.74rem;' . PHP_EOL .
+    '            font-weight: 500;' . PHP_EOL .
     '            white-space: normal !important;' . PHP_EOL .
     '            word-break: normal;' . PHP_EOL .
     '            overflow-wrap: break-word;' . PHP_EOL .
-    '            line-height: 1.5;' . PHP_EOL .
-    '            padding: 0.35rem 0.65rem;' . PHP_EOL .
+    '            line-height: 1.55;' . PHP_EOL .
+    '            padding: 0.35rem 0.7rem;' . PHP_EOL .
+    '            border-radius: 0.5rem;' . PHP_EOL .
     '            max-width: 100%;' . PHP_EOL .
-    '            background-color: var(--bs-tertiary-bg) !important;' . PHP_EOL .
-    '            color: var(--bs-body-color) !important;' . PHP_EOL .
-    '            border: 1px solid var(--bs-border-color) !important;' . PHP_EOL .
+    '            background-color: rgba(13, 110, 253, 0.08) !important;' . PHP_EOL .
+    '            color: var(--bs-primary-text-emphasis) !important;' . PHP_EOL .
+    '            border: 1px solid rgba(13, 110, 253, 0.2) !important;' . PHP_EOL .
     '            text-align: start;' . PHP_EOL .
+    '            text-transform: none;' . PHP_EOL .
+    '            letter-spacing: 0;' . PHP_EOL .
     '        }' . PHP_EOL .
     '        .sidebar-nav {' . PHP_EOL .
     '            position: sticky;' . PHP_EOL .
-    '            top: 85px;' . PHP_EOL .
-    '            max-height: calc(100vh - 100px);' . PHP_EOL .
+    '            top: 90px;' . PHP_EOL .
+    '            max-height: calc(100vh - 110px);' . PHP_EOL .
     '            overflow-y: auto;' . PHP_EOL .
+    '            background-color: var(--bs-body-bg);' . PHP_EOL .
+    '            border: 1px solid var(--bs-border-color-translucent) !important;' . PHP_EOL .
+    '            border-radius: 0.9rem;' . PHP_EOL .
+    '            padding: 1rem !important;' . PHP_EOL .
+    '            box-shadow: var(--demo-card-shadow);' . PHP_EOL .
+    '            scrollbar-width: thin;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .sidebar-nav .nav-link {' . PHP_EOL .
+    '            border-radius: 0.55rem;' . PHP_EOL .
+    '            padding: 0.45rem 0.75rem;' . PHP_EOL .
+    '            color: var(--bs-secondary-color);' . PHP_EOL .
+    '            font-weight: 500;' . PHP_EOL .
+    '            transition: all 0.18s ease;' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .sidebar-nav .nav-link:hover {' . PHP_EOL .
+    '            color: var(--bs-primary);' . PHP_EOL .
+    '            background-color: rgba(13, 110, 253, 0.08);' . PHP_EOL .
+    '            transform: translateX(2px);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        .sidebar-nav .nav-link.active {' . PHP_EOL .
+    '            background: linear-gradient(135deg, #0d6efd 0%, #4f46e5 100%);' . PHP_EOL .
+    '            color: #fff !important;' . PHP_EOL .
+    '            font-weight: 600;' . PHP_EOL .
+    '            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);' . PHP_EOL .
+    '        }' . PHP_EOL .
+    '        dialog::backdrop {' . PHP_EOL .
+    '            backdrop-filter: blur(4px);' . PHP_EOL .
+    '            background: rgba(15, 23, 42, 0.55);' . PHP_EOL .
     '        }' . PHP_EOL .
     '    </style>' . PHP_EOL .
     '</head>';
@@ -113,7 +237,7 @@ echo $htmlBodyInicio . PHP_EOL;
 echo $bs->header(
     $bs->geraNavBar(
         posicao: 'F',
-        brand: 'PHP Bootstrap Class v2.0',
+        brand: 'PHP Bootstrap Class v2.1',
         logo: '',
         link: '#inicio',
         menuesq: $menuEsquerda,
@@ -129,7 +253,7 @@ echo $bs->geraThemeToggle(tipo: 'dropdown', posicao: 'bottom-end', incluiScript:
 
 // Menu Lateral (Sumário das 12 Seções)
 $sidebarNav = $bs->nav(
-    $bs->h(6, $bs->obtemGlyphicon('th') . ' Índice de Métodos', classe: 'text-uppercase text-body-secondary fw-bold fs-7 mb-3') .
+    $bs->h(6, $bs->obtemGlyphicon('th') . ' Índice de Métodos', classe: 'text-uppercase text-body-secondary fw-bold small mb-3') .
     $bs->geraNav(array(
         array('rotulo' => '1. Layout & Stacks', 'url' => '#sec-layout'),
         array('rotulo' => '2. Botões & Ações', 'url' => '#sec-botoes'),
@@ -156,7 +280,7 @@ $heroConteudo = $bs->h(1, $bs->obtemGlyphicon('star') . ' PHP Bootstrap Class', 
     $bs->par('Demonstração interativa de todos os ' . $bs->strong('179 métodos públicos') . ' da biblioteca modernizada para ' . $bs->strong('Bootstrap 5.3.8') . ' e ' . $bs->strong('PHP 8.x') . '. Uma classe PHP 100% autônoma, sem dependências externas, compatível com Dark Mode nativo e flexbox utilities.', classe: 'lead') .
     $bs->hr('my-4') .
     $bs->div(
-        $bs->obtemBadge('v2.0 Milestone', 'text-bg-dark fs-6') . ' ' .
+        $bs->obtemBadge('v2.1 Milestone', 'text-bg-dark fs-6') . ' ' .
         $bs->obtemBadge('179 Métodos Públicos', 'text-bg-primary fs-6') . ' ' .
         $bs->obtemBadge('Bootstrap 5.3.8 Nativo', 'text-bg-success fs-6') . ' ' .
         $bs->obtemBadge('PHP 8.x Compatível', 'text-bg-info fs-6') . ' ' .
@@ -170,7 +294,7 @@ echo $bs->divJumbotron($heroConteudo, id: 'jumbotron-hero');
 // SEÇÃO 1: LAYOUT, CONTAINERS & STACKS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('th') . ' 1. Layout, Containers & Stacks ' . $bs->span('51 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('th') . ' 1. Layout, Containers & Stacks ' . $bs->span('51 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Utilitários para contêineres, alinhamentos, grids de colunas e stacks verticais/horizontais do Bootstrap 5.');
 
 $box1 = $bs->div(
@@ -195,7 +319,7 @@ $box1 = $bs->div(
     $bs->div(
         $bs->h(6, 'Lista de Descrição em Grade ($bs->dl, dt, dd):', classe: 'small text-muted mb-2') .
         $bs->dl(
-            $bs->dt('Versão', classe: 'col-sm-4') . $bs->dd('2.0 Major Release', classe: 'col-sm-8 mb-1') .
+            $bs->dt('Versão', classe: 'col-sm-4') . $bs->dd('2.1 Release', classe: 'col-sm-8 mb-1') .
             $bs->dt('Ambiente', classe: 'col-sm-4') . $bs->dd('PHP 8.x + Bootstrap 5.3.8', classe: 'col-sm-8 mb-1') .
             $bs->dt('Licença', classe: 'col-sm-4') . $bs->dd('MIT Open Source', classe: 'col-sm-8 mb-0'),
             classe: 'row small mb-0'
@@ -213,15 +337,16 @@ $box1 = $bs->div(
     $bs->nav('Exemplo de navegação semântica gerada com $bs->nav()', classe: 'p-2 border rounded bg-body-tertiary mb-2 text-center small fw-medium', ariaLabel: 'Exemplo de navegação') .
     $bs->main('Exemplo de contêiner semântico gerado com $bs->main()', classe: 'p-2 border rounded bg-body-tertiary mb-2 text-center small fw-medium') .
     $bs->divCenterBlock(
-        $bs->span('Bloco centralizado com $bs->divCenterBlock()', classe: 'alert alert-info py-2 px-3 mb-0 text-center w-70'),
-        id: 'exemplo-center-block'
+        $bs->span('Bloco centralizado com $bs->divCenterBlock()', classe: 'd-block alert alert-info py-2 px-3 mb-0 text-center'),
+        id: 'exemplo-center-block',
+        classe: 'w-75'
     ),
     classe: 'demo-box'
 );
 
-$col1 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-light text-center'), tamanho: 'sm', colspan: 4);
-$col2 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-light text-center'), tamanho: 'sm', colspan: 4);
-$col3 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-light text-center'), tamanho: 'sm', colspan: 4);
+$col1 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-body-tertiary text-center'), tamanho: 'sm', colspan: 4);
+$col2 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-body-tertiary text-center'), tamanho: 'sm', colspan: 4);
+$col3 = $bs->divColuna($bs->div('Col 4 (sm)', classe: 'p-2 border bg-body-tertiary text-center'), tamanho: 'sm', colspan: 4);
 $box2 = $bs->div(
     $bs->div(
         $bs->span('Linha e Colunas Responsivas') . PHP_EOL .
@@ -286,7 +411,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-layout', classe: 'demo-section');
 // SEÇÃO 2: BOTÕES, AÇÕES & TOOLBARS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('wrench') . ' 2. Botões, Ações & Toolbars ' . $bs->span('14 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('wrench') . ' 2. Botões, Ações & Toolbars ' . $bs->span('14 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Botões nativos, links estilizados, botão de fechar, spinners de carregamento, toolbars e grupos alternadores (btn-check).');
 
 echo $bs->div(
@@ -414,7 +539,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-botoes', classe: 'demo-section');
 // SEÇÃO 3: FORMULÁRIOS CLÁSSICOS & INPUTS BÁSICOS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('edit') . ' 3. Formulários Clássicos & Inputs Básicos ' . $bs->span('36 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('edit') . ' 3. Formulários Clássicos & Inputs Básicos ' . $bs->span('36 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Campos de texto, e-mail, senha, textarea, switches, sliders, color picker, grupos de inputs com addons, uploads e feedbacks de validação.');
 
 $formConteudo = $bs->inputOculto('csrf_token', 'token', 'a8f7b6c5d4e3') .
@@ -470,7 +595,7 @@ $boxForm1 = $bs->div(
         $bs->inputGroupAddon($bs->input('text', 'url_artigo', placeholder: 'https://exemplo.com/artigo/'), prefixo: $bs->obtemGlyphicon('star'), sufixo: '.html'),
         classe: 'mb-3'
     ) .
-    $bs->div($bs->inputGroupTexto('igTexto', 'texto_group', 'Valor do Campo', 20, 50, rotulo: 'Input Group Estruturado', addon1: '[Pre]', addon2: '[Pos]'), classe: 'mb-3') .
+    $bs->div($bs->inputGroupTexto('igTexto', 'texto_group', 'Valor do Campo', 20, 50, rotulo: 'Input Group Estruturado', addon1: '[Pre]', addon3: '[Pos]'), classe: 'mb-3') .
     $bs->div(
         $bs->label('Div Input Group Genérico ($bs->divInputGroup):', classe: 'form-label') . PHP_EOL .
         $bs->divInputGroup($bs->span($bs->obtemGlyphicon('search'), classe: 'input-group-text') . $bs->input('text', 'pesquisa', placeholder: 'Pesquisar catálogo...'))
@@ -490,8 +615,8 @@ $boxForm2 = $bs->div(
     $bs->div(
         $bs->label('Controle Deslizante com Saída Dinâmica ($bs->input e output):', for: 'rngExemplo', classe: 'form-label') . PHP_EOL .
         $bs->div(
-            $bs->input('range', 'faixaValor', '75', 'rngExemplo', 'form-range w-75') . ' ' .
-            $bs->output('75%', for: 'rngExemplo', classe: 'badge bg-primary fs-6'),
+            $bs->input('range', 'faixaValor', '75', 'rngExemplo', 'form-range w-75', atributos: 'oninput="document.getElementById(\'outExemplo\').value = this.value + \'%\'"') . ' ' .
+            $bs->output('75%', for: 'rngExemplo', id: 'outExemplo', classe: 'badge bg-primary fs-6'),
             classe: 'd-flex align-items-center gap-3'
         ),
         classe: 'mb-3'
@@ -600,7 +725,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-forms', classe: 'demo-section');
 // SEÇÃO 4: FLOATING LABELS (RÓTULOS FLUTUANTES)
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('edit') . ' 4. Floating Labels (Bootstrap 5) ' . $bs->span('3 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('edit') . ' 4. Floating Labels (Bootstrap 5) ' . $bs->span('3 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Campos modernos onde o rótulo (label) flutua elegantemente para o topo durante a digitação e preenchimento.');
 
 echo $bs->div(
@@ -624,7 +749,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-floating', classe: 'demo-section');
 // SEÇÃO 5: NAVEGAÇÃO, ABAS, BREADCRUMB & PAGINAÇÃO
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('flag') . ' 5. Navegação, Abas, Breadcrumbs & Paginação ' . $bs->span('7 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('flag') . ' 5. Navegação, Abas, Breadcrumbs & Paginação ' . $bs->span('7 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Componentes de navegação estruturada: breadcrumbs, list groups interativos, nav tabs/pills com painéis funcionais e sistemas completos de paginação.');
 
 $caminhoBreadcrumb = array(
@@ -743,7 +868,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-nav', classe: 'demo-section');
 // SEÇÃO 6: CARDS, GRIDS & PAINÉIS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('th') . ' 6. Cards, Grids & Painéis ' . $bs->span('5 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('th') . ' 6. Cards, Grids & Painéis ' . $bs->span('5 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Organização visual através do sistema moderno de Cards do Bootstrap 5, Card Groups contínuos, Card Grids responsivas com altura alinhada (.h-100), painéis e caixas de destaque.');
 
 $btnCard1 = $bs->buttonlink('#', 'Detalhes', classe: 'primary', tamanho: 'sm');
@@ -831,7 +956,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-cards', classe: 'demo-section');
 // SEÇÃO 7: OVERLAYS, MODAIS, DRAWER & NOTIFICAÇÕES
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('eye-open') . ' 7. Overlays, Modais, Offcanvas & Notificações ' . $bs->span('7 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('eye-open') . ' 7. Overlays, Modais, Offcanvas & Notificações ' . $bs->span('7 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Componentes dinâmicos de interface: janelas modais, gaveta lateral (Offcanvas), alertas dispensáveis, dropdowns independentes, diálogos nativos e notificações Toast.');
 
 $boxOverlay1 = $bs->div(
@@ -949,7 +1074,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-overlays', classe: 'demo-section');
 // SEÇÃO 8: LOADERS, SKELETONS & INDICADORES
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('refresh') . ' 8. Loaders, Placeholders (Skeletons) & Indicadores ' . $bs->span('10 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('refresh') . ' 8. Loaders, Placeholders (Skeletons) & Indicadores ' . $bs->span('10 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Barras de progresso animadas, spinners modernos de espera, skeletons (placeholders) para efeito de pré-carregamento e badges contextuais.');
 
 $boxLoaders1 = $bs->div(
@@ -1059,7 +1184,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-loaders', classe: 'demo-section');
 // SEÇÃO 9: MÍDIA, IMAGENS, FIGURES & VÍDEO EMBED
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('file') . ' 9. Mídia, Imagens, Figures & Vídeo Embed ' . $bs->span('16 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('file') . ' 9. Mídia, Imagens, Figures & Vídeo Embed ' . $bs->span('16 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Imagens responsivas (.img-fluid), miniaturas (.img-thumbnail), figures com legendas alinhadas, carrossel de imagens e incorporação responsiva de vídeos.');
 
 $boxMidia1 = $bs->div(
@@ -1117,7 +1242,7 @@ $boxMidia1 = $bs->div(
 
 $urlOriginal = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 $urlConvertida = $bs->converteUrlEmbed($urlOriginal);
-$vttLegenda = 'data:text/vtt;charset=utf-8,' . rawurlencode("WEBVTT\n\n00:00:00.000 --> 00:00:05.000\nDemonstração de legendas com \$bs->track()\n\n00:00:05.500 --> 00:00:10.000\nPHP Bootstrap Class v2.0");
+$vttLegenda = 'data:text/vtt;charset=utf-8,' . rawurlencode("WEBVTT\n\n00:00:00.000 --> 00:00:05.000\nDemonstração de legendas com \$bs->track()\n\n00:00:05.500 --> 00:00:10.000\nPHP Bootstrap Class v2.1");
 
 $boxMidia2 = $bs->div(
     $bs->div(
@@ -1182,7 +1307,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-midia', classe: 'demo-section');
 // SEÇÃO 10: CONTEÚDO, DADOS & TABELAS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('calendar') . ' 10. Conteúdo, Dados & Tabelas ' . $bs->span('21 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('calendar') . ' 10. Conteúdo, Dados & Tabelas ' . $bs->span('21 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Estruturação de artigos editoriais, painéis sanfonados colapsáveis (Accordion) e tabelas responsivas completas com zebra e hover.');
 
 $conteudoAccordion = array(
@@ -1337,7 +1462,7 @@ echo $bs->section(ob_get_clean(), id: 'sec-conteudo', classe: 'demo-section');
 // SEÇÃO 11: HELPERS DE SCRIPT, INJEÇÃO & ASSETS
 // ==============================================================
 ob_start();
-echo $bs->h(2, $bs->obtemGlyphicon('wrench') . ' 11. Helpers de Scripts, Injeção & Assets ' . $bs->span('9 métodos', classe: 'badge text-bg-secondary fs-7'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
+echo $bs->h(2, $bs->obtemGlyphicon('wrench') . ' 11. Helpers de Scripts, Injeção & Assets ' . $bs->span('9 métodos', classe: 'badge text-bg-secondary fs-6'), classe: 'h3 mb-3 d-flex align-items-center gap-2');
 echo $bs->par('Helpers para injeção de atributos tooltip/popover em qualquer tag HTML pura, scripts oficiais de inicialização Vanilla JS e injeção de assets CSS/JS.');
 
 $linkSimples = $bs->a('#', 'Link Puro com Tooltip', classe: 'btn btn-outline-info');
@@ -1424,6 +1549,66 @@ echo $bs->tagJs();
 
 // scriptInicializaTodos: Ativação dos Tooltips, Popovers e Toasts nativos do Bootstrap 5
 echo $bs->scriptInicializaTodos();
+
+// Script visual complementar: Renderização do gráfico HTML5 <canvas> e Scrollspy da barra lateral
+$scriptVisualDemo = '<script>' . PHP_EOL .
+    'document.addEventListener("DOMContentLoaded", function () {' . PHP_EOL .
+    '    // 1. Desenha gráfico demonstrativo moderno no <canvas id="demoCanvasChart">' . PHP_EOL .
+    '    const canvas = document.getElementById("demoCanvasChart");' . PHP_EOL .
+    '    const drawCanvasChart = () => {' . PHP_EOL .
+    '        if (!canvas || !canvas.getContext) return;' . PHP_EOL .
+    '        const ctx = canvas.getContext("2d");' . PHP_EOL .
+    '        const w = canvas.width;' . PHP_EOL .
+    '        const h = canvas.height;' . PHP_EOL .
+    '        ctx.clearRect(0, 0, w, h);' . PHP_EOL .
+    '        const pts = [18, 35, 24, 46, 32, 52, 40, 48, 22, 12];' . PHP_EOL .
+    '        const step = w / (pts.length - 1);' . PHP_EOL .
+    '        const grad = ctx.createLinearGradient(0, 0, 0, h);' . PHP_EOL .
+    '        grad.addColorStop(0, "rgba(13, 110, 253, 0.38)");' . PHP_EOL .
+    '        grad.addColorStop(1, "rgba(102, 16, 242, 0.02)");' . PHP_EOL .
+    '        ctx.beginPath();' . PHP_EOL .
+    '        ctx.moveTo(0, h);' . PHP_EOL .
+    '        pts.forEach((y, i) => ctx.lineTo(i * step, y));' . PHP_EOL .
+    '        ctx.lineTo(w, h);' . PHP_EOL .
+    '        ctx.closePath();' . PHP_EOL .
+    '        ctx.fillStyle = grad;' . PHP_EOL .
+    '        ctx.fill();' . PHP_EOL .
+    '        ctx.beginPath();' . PHP_EOL .
+    '        pts.forEach((y, i) => i === 0 ? ctx.moveTo(0, y) : ctx.lineTo(i * step, y));' . PHP_EOL .
+    '        ctx.strokeStyle = "#0d6efd";' . PHP_EOL .
+    '        ctx.lineWidth = 2.2;' . PHP_EOL .
+    '        ctx.stroke();' . PHP_EOL .
+    '        pts.forEach((y, i) => {' . PHP_EOL .
+    '            ctx.beginPath();' . PHP_EOL .
+    '            ctx.arc(i * step, y, 3, 0, Math.PI * 2);' . PHP_EOL .
+    '            ctx.fillStyle = "#ffffff";' . PHP_EOL .
+    '            ctx.fill();' . PHP_EOL .
+    '            ctx.strokeStyle = "#0d6efd";' . PHP_EOL .
+    '            ctx.lineWidth = 1.8;' . PHP_EOL .
+    '            ctx.stroke();' . PHP_EOL .
+    '        });' . PHP_EOL .
+    '    };' . PHP_EOL .
+    '    drawCanvasChart();' . PHP_EOL .
+    '' . PHP_EOL .
+    '    // 2. Scrollspy suave para destacar a seção visível no menu lateral (.sidebar-nav)' . PHP_EOL .
+    '    const sections = document.querySelectorAll(".demo-section[id]");' . PHP_EOL .
+    '    const navLinks = document.querySelectorAll(".sidebar-nav .nav-link");' . PHP_EOL .
+    '    if ("IntersectionObserver" in window && sections.length && navLinks.length) {' . PHP_EOL .
+    '        const observer = new IntersectionObserver((entries) => {' . PHP_EOL .
+    '            entries.forEach(entry => {' . PHP_EOL .
+    '                if (entry.isIntersecting) {' . PHP_EOL .
+    '                    const id = "#" + entry.target.getAttribute("id");' . PHP_EOL .
+    '                    navLinks.forEach(link => {' . PHP_EOL .
+    '                        link.classList.toggle("active", link.getAttribute("href") === id);' . PHP_EOL .
+    '                    });' . PHP_EOL .
+    '                }' . PHP_EOL .
+    '            });' . PHP_EOL .
+    '        }, { rootMargin: "-20% 0px -65% 0px", threshold: 0 });' . PHP_EOL .
+    '        sections.forEach(sec => observer.observe(sec));' . PHP_EOL .
+    '    }' . PHP_EOL .
+    '});' . PHP_EOL .
+    '</script>';
+echo $scriptVisualDemo . PHP_EOL;
 
 // Fechamento do corpo e do documento HTML
 $htmlBodyFim = '</body>' . PHP_EOL . '</html>';

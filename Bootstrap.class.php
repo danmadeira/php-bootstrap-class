@@ -10,8 +10,8 @@
  * Flexbox, Grid e CDN jsDelivr, sem dependências externas em PHP ou jQuery.
  *
  * @author Daniel Madeira
- * @version 2.0
- * @date 2026-10-24
+ * @version 2.1
+ * @date 2026-10-25
  * @license MIT License (https://opensource.org/licenses/MIT)
  * @link https://github.com/danmadeira/php-bootstrap-class
  */
@@ -1856,7 +1856,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -1893,7 +1899,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -1930,7 +1942,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -1970,7 +1988,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2007,7 +2031,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2057,7 +2087,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valorAttr) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valorAttr) . '"';
+                if (is_bool($valorAttr)) {
+                    if ($valorAttr) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valorAttr) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2094,7 +2130,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2131,7 +2173,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2166,7 +2214,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2201,7 +2255,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2236,7 +2296,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2271,7 +2337,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2306,7 +2378,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2341,7 +2419,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2380,7 +2464,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $val) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($val) . '"';
+                if (is_bool($val)) {
+                    if ($val) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$val) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2425,7 +2515,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $val) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($val) . '"';
+                if (is_bool($val)) {
+                    if ($val) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$val) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2460,7 +2556,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2499,7 +2601,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2534,7 +2642,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2573,7 +2687,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2608,7 +2728,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2643,7 +2769,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2678,7 +2810,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2723,7 +2861,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2766,7 +2910,13 @@ class Bootstrap
         $extra = '';
         if (is_array($atributos)) {
             foreach ($atributos as $chave => $valor) {
-                $extra .= ' ' . htmlspecialchars($chave) . '="' . htmlspecialchars($valor) . '"';
+                if (is_bool($valor)) {
+                    if ($valor) {
+                        $extra .= ' ' . htmlspecialchars((string)$chave);
+                    }
+                } else {
+                    $extra .= ' ' . htmlspecialchars((string)$chave) . '="' . htmlspecialchars((string)$valor) . '"';
+                }
             }
         } elseif (!empty($atributos)) {
             $extra = ' ' . trim($atributos);
@@ -2871,7 +3021,7 @@ class Bootstrap
             $id = ' id="' . $id . '"';
         }
         if (!empty($legenda)) {
-            $legenda = '<legend class="form-label">' . $legenda . '</legend>' . PHP_EOL;
+            $legenda = '<label class="form-label">' . $legenda . '</label>' . PHP_EOL;
         }
         $divisor = '<div class="mb-3"' . $id . '>' . PHP_EOL . $legenda . $conteudo . '</div>' . PHP_EOL;
         return $divisor;
@@ -2931,12 +3081,17 @@ class Bootstrap
         if (!empty($classe)) {
             $classe = ' ' . $classe;
         }
+        if ($mesmaaltura) {
+            $altura = ' align-items-stretch';
+        } else {
+            $altura = '';
+        }
         if ($flexivel) {
             $flex = ' flex-row';
         } else {
             $flex = '';
         }
-        $divisor = '<div class="row' . $flex . $classe . '"' . $id . '>' . PHP_EOL . $conteudo . '</div>' . PHP_EOL;
+        $divisor = '<div class="row' . $flex . $altura . $classe . '"' . $id . '>' . PHP_EOL . $conteudo . '</div>' . PHP_EOL;
         return $divisor;
     }
 
@@ -3148,6 +3303,7 @@ class Bootstrap
         if (!empty($tamanho)) {
             if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
             elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+            else { $tamanho = ''; }
         }
         if ($onclick and !empty($funcao)) { $clique = ' onclick="' . $funcao . '"'; }
         else { $clique = ''; }
@@ -3186,6 +3342,7 @@ class Bootstrap
         else { $linha = ''; }
         if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
         elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+        else { $tamanho = ''; }
         if ($onclick and !empty($funcao)) { $clique = ' onclick="' . $funcao . '"'; }
         else { $clique = ''; }
         return '<button type="submit"' . $id . ' class="btn btn-' . $linha . $classe . $tamanho . $largura . '" name="' . $nome . '" value="' . $valor . '"' . $clique . $off . '>' . $rotulo . '</button>';
@@ -3221,6 +3378,7 @@ class Bootstrap
         if (!empty($tamanho)) {
             if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
             elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+            else { $tamanho = ''; }
         }
         if (empty($link) or $link == '#') { $href = ''; }
         else { $href = ' href="' . $link . '"'; }
@@ -3300,6 +3458,8 @@ class Bootstrap
                 $tamanho = ' btn-lg';
             } elseif ($tamanho == 'S' || $tamanho == 'sm') {
                 $tamanho = ' btn-sm';
+            } else {
+                $tamanho = '';
             }
         }
         $target = (strpos($alvoid, '#') === 0) ? $alvoid : ('#' . $alvoid);
@@ -3794,6 +3954,7 @@ class Bootstrap
         else { $linha = ''; }
         if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
         elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+        else { $tamanho = ''; }
         if ($onclick and !empty($funcao)) { $clique = ' onclick="' . $funcao . '"'; }
         else { $clique = ''; }
         return '<input type="button"' . $id . ' class="btn btn-' . $linha . $classe . $tamanho . $largura . '" name="' . $nome . '" value="' . $rotulo . '"' . $clique . $off . '>';
@@ -3828,6 +3989,7 @@ class Bootstrap
         else { $linha = ''; }
         if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
         elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+        else { $tamanho = ''; }
         if ($onclick and !empty($funcao)) { $clique = ' onclick="' . $funcao . '"'; }
         else { $clique = ''; }
         return '<input type="submit"' . $id . ' class="btn btn-' . $linha . $classe . $tamanho . $largura . '" name="' . $nome . '" value="' . $rotulo . '"' . $clique . $off . '>';
@@ -3862,6 +4024,7 @@ class Bootstrap
         else { $linha = ''; }
         if ($tamanho == 'L' || $tamanho == 'lg') { $tamanho = ' btn-lg'; }
         elseif ($tamanho == 'S' || $tamanho == 'sm') { $tamanho = ' btn-sm'; }
+        else { $tamanho = ''; }
         if ($onclick and !empty($funcao)) { $clique = ' onclick="' . $funcao . '"'; }
         else { $clique = ''; }
         return '<input type="reset"' . $id . ' class="btn btn-' . $linha . $classe . $tamanho . $largura . '" name="' . $nome . '" value="' . $rotulo . '"' . $clique . $off . '>';
@@ -3912,6 +4075,7 @@ class Bootstrap
         if (!empty($dica)) {
             $dica = ' placeholder="' . $dica . '"';
         }
+        $req = $requerido ? ' required' : '';
         if ($foco) {
             $afc = ' autofocus';
         } else {
@@ -3926,7 +4090,7 @@ class Bootstrap
             $texto .= '<span class="input-group-text" id="basic-addon2">'.$addon2.'</span>' . PHP_EOL;
         }
         $texto .= '<input type="text" name="' . $nome . '" id="' . $id . '" class="form-control"' . $dica .
-                  ' value="' . $valor . '" size="' . $tamanho . '" maxlength="' . $maximo . '"' . $afc . '>' . PHP_EOL;
+                  ' value="' . $valor . '" size="' . $tamanho . '" maxlength="' . $maximo . '"' . $req . $afc . '>' . PHP_EOL;
         if (!empty($addon3)) {
             $texto .= '<span class="input-group-text" id="basic-addon3">'.$addon3.'</span>' . PHP_EOL;
         }
@@ -4057,6 +4221,7 @@ class Bootstrap
         if (!empty($dica)) {
             $dica = ' placeholder="' . $dica . '"';
         }
+        $req = $requerido ? ' required' : '';
         if ($desativado) {
             $d = ' disabled';
         } else {
@@ -4071,7 +4236,7 @@ class Bootstrap
         $maxAttr = (!empty($maximo) || $maximo === '0' || $maximo === 0) ? (' maxlength="' . $maximo . '"') : '';
         $texto = $rotulo .
                  '<input type="text" name="' . $nome . '" id="' . $id . '" class="form-control"' . $dica .
-                 ' value="' . $valor . '"' . $tamAttr . $maxAttr . $d . $afc . '>' . PHP_EOL;
+                 ' value="' . $valor . '"' . $tamAttr . $maxAttr . $req . $d . $afc . '>' . PHP_EOL;
         return $texto;
     }
 
@@ -4102,6 +4267,7 @@ class Bootstrap
         if (!empty($dica)) {
             $dica = ' placeholder="' . $dica . '"';
         }
+        $req = $requerido ? ' required' : '';
         if ($desativado) {
             $d = ' disabled';
         } else {
@@ -4115,7 +4281,7 @@ class Bootstrap
         $tamAttr = (!empty($tamanho) || $tamanho === '0' || $tamanho === 0) ? (' size="' . $tamanho . '"') : '';
         $email = $rotulo .
                  '<input type="email" name="' . $nome . '" id="' . $id . '" class="form-control"' . $dica .
-                 ' value="' . $valor . '"' . $tamAttr . $d . $afc . '>' . PHP_EOL;
+                 ' value="' . $valor . '"' . $tamAttr . $req . $d . $afc . '>' . PHP_EOL;
         return $email;
     }
 
@@ -4146,6 +4312,7 @@ class Bootstrap
         if (!empty($dica)) {
             $dica = ' placeholder="' . $dica . '"';
         }
+        $req = $requerido ? ' required' : '';
         if ($desativado) {
             $d = ' disabled';
         } else {
@@ -4159,7 +4326,7 @@ class Bootstrap
         $tamAttr = (!empty($tamanho) || $tamanho === '0' || $tamanho === 0) ? (' size="' . $tamanho . '"') : '';
         $senha = $rotulo .
                  '<input type="password" name="' . $nome . '" id="' . $id . '" class="form-control"' . $dica .
-                 ' value="' . $valor . '"' . $tamAttr . $d . $afc . '>' . PHP_EOL;
+                 ' value="' . $valor . '"' . $tamAttr . $req . $d . $afc . '>' . PHP_EOL;
         return $senha;
     }
 
@@ -4193,6 +4360,7 @@ class Bootstrap
             }
             $rotulo = '<label for="' . $id . '" class="form-label">' . $rotulo . $asterisco . '</label>' . PHP_EOL;
         }
+        $req = $requerido ? ' required' : '';
         if ($foco) {
             $afc = ' autofocus';
         } else {
@@ -4205,7 +4373,7 @@ class Bootstrap
         }
         $area = $rotulo .
                 '<textarea name="' . $nome . '" id="' . $id . '" class="form-control"' .
-                ' rows="' . $linhas . '" cols="' . $colunas . '"' . $max . $afc . $d . '>' . $texto . '</textarea>' . PHP_EOL;
+                ' rows="' . $linhas . '" cols="' . $colunas . '"' . $max . $req . $afc . $d . '>' . $texto . '</textarea>' . PHP_EOL;
         return $area;
     }
 
@@ -4343,7 +4511,7 @@ class Bootstrap
         $selecao = '<div class="form-floating' . $classe . '">' . PHP_EOL .
                    '<select name="' . $nome . '" id="' . $id . '" class="form-select"' . $req . $d . '>' . PHP_EOL;
         foreach ($opcoes as $valor => $legenda) {
-            if (!empty($padrao) and $valor == $padrao) {
+            if (($padrao !== '' && $padrao !== null) && (string)$valor === (string)$padrao) {
                 $selected = ' selected';
             } else {
                 $selected = '';
@@ -4524,7 +4692,7 @@ class Bootstrap
         $i = 0;
         $radio = '';
         foreach ($opcoes as $valor => $rotulo) {
-            if (!empty($padrao) and $valor == $padrao) {
+            if (($padrao !== '' && $padrao !== null) && (string)$valor === (string)$padrao) {
                 $ckd = ' checked';
             } else {
                 $ckd = '';
@@ -4580,8 +4748,9 @@ class Bootstrap
         }
         $selecao = $rotulo .
                    '<select name="' . $nome . '" id="' . $id . '" class="form-select' . $classeTam . '"' . $tamAttr . $mult . $d . '>' . PHP_EOL;
+        $valoresPadrao = is_array($padrao) ? array_map('strval', $padrao) : (($padrao !== '' && $padrao !== null) ? array(strval($padrao)) : array());
         foreach ($opcoes as $valor => $legenda) {
-            if (!empty($padrao) and $valor == $padrao) {
+            if (in_array(strval($valor), $valoresPadrao, true)) {
                 $selected = ' selected';
             } else {
                 $selected = '';
@@ -4624,8 +4793,9 @@ class Bootstrap
         if (!empty($dica)) {
             $dica = ' placeholder="' . $dica . '"';
         }
+        $req = $requerido ? ' required' : '';
         $d = $rotulo . '<input type="date" name="' . $nome . '" id="' . $id . '" class="form-control"' . $dica .
-             $maximo . $minimo . ' value="' . $valor . '">' . PHP_EOL;
+             $maximo . $minimo . ' value="' . $valor . '"' . $req . '>' . PHP_EOL;
         return $d;
     }
 
@@ -5118,8 +5288,10 @@ class Bootstrap
             $n++;
         }
 
+        $classeExtra = (!empty($classe) && $classe !== 'default') ? (' ' . trim($classe)) : '';
+
         $navtab = '<div class="nav-tabs-wrapper">' . PHP_EOL .
-                  '<ul class="nav nav-tabs mb-3" id="' . $navId . '" role="tablist">' . PHP_EOL .
+                  '<ul class="nav nav-tabs mb-3' . $classeExtra . '" id="' . $navId . '" role="tablist">' . PHP_EOL .
                   $rotulos .
                   '</ul>' . PHP_EOL .
                   '<div class="tab-content" id="' . $navId . 'Content">' . PHP_EOL .
@@ -5190,7 +5362,8 @@ class Bootstrap
             $ativo = !empty($item['ativo']);
             $desativado = !empty($item['desativado']);
             $icone = !empty($item['icone']) ? ($this->obtemGlyphicon($item['icone']) . ' ') : '';
-            $badge = !empty($item['badge']) ? (' ' . $this->obtemBadge($item['badge'], 'ms-1')) : '';
+            $badgeClasse = !empty($item['badgeClasse']) ? ($item['badgeClasse'] . ' ms-1') : 'ms-1';
+            $badge = !empty($item['badge']) ? (' ' . $this->obtemBadge($item['badge'], $badgeClasse)) : '';
             $conteudo = isset($item['conteudo']) ? $item['conteudo'] : null;
 
             $classeLink = 'nav-link';
@@ -5643,8 +5816,8 @@ class Bootstrap
         if (!empty($texto)) {
             $texto = '<div class="card-texto"><p class="card-text">' . $texto . '</p></div>' . PHP_EOL;
         }
-        if (!empty($imgsrc) and !empty($imgalt)) {
-            $imagem = '<img class="card-img-top" src="' . $imgsrc . '" alt="' . $imgalt . '">' . PHP_EOL;
+        if (!empty($imgsrc)) {
+            $imagem = '<img class="card-img-top" src="' . $imgsrc . '" alt="' . htmlspecialchars($imgalt, ENT_QUOTES, 'UTF-8') . '">' . PHP_EOL;
         } else {
             $imagem = '';
         }
@@ -5942,7 +6115,11 @@ class Bootstrap
                     $bPill = !empty($item['badge']['pilula']) ? ' rounded-pill' : '';
                     $badgeHtml = '<span class="badge text-bg-' . $bTema . $bPill . '">' . $bTexto . '</span>';
                 } else {
-                    $badgeHtml = '<span class="badge text-bg-primary rounded-pill">' . $item['badge'] . '</span>';
+                    $bClasse = !empty($item['badgeClasse']) ? $item['badgeClasse'] : 'text-bg-primary';
+                    if (strpos($bClasse, 'bg-') === false && strpos($bClasse, 'text-bg-') === false) {
+                        $bClasse = 'text-bg-' . $bClasse;
+                    }
+                    $badgeHtml = '<span class="badge ' . $bClasse . ' rounded-pill">' . $item['badge'] . '</span>';
                 }
             }
 
@@ -5954,6 +6131,15 @@ class Bootstrap
                 $cCkd = !empty($item['check']['checked']) ? ' checked' : '';
                 $cDis = !empty($item['check']['disabled']) ? ' disabled' : '';
                 $inputControle = '<input class="form-check-input me-2" type="checkbox" name="' . $cNome . '" id="' . $cId . '" value="' . $cValor . '"' . $cCkd . $cDis . '>';
+            } elseif (!empty($item['checkbox'])) {
+                $cNome = isset($item['nomeCheck']) ? $item['nomeCheck'] : (isset($item['nome']) ? $item['nome'] : '');
+                $cId = isset($item['idCheck']) ? $item['idCheck'] : (isset($item['id']) ? $item['id'] : $cNome);
+                $cValor = isset($item['valorCheck']) ? $item['valorCheck'] : (isset($item['valor']) ? $item['valor'] : '1');
+                $cCkd = (!empty($item['checado']) || !empty($item['checked'])) ? ' checked' : '';
+                $cDis = $desativado ? ' disabled' : '';
+                $attrId = !empty($cId) ? (' id="' . $cId . '"') : '';
+                $attrNome = !empty($cNome) ? (' name="' . $cNome . '"') : '';
+                $inputControle = '<input class="form-check-input me-2" type="checkbox"' . $attrNome . $attrId . ' value="' . $cValor . '"' . $cCkd . $cDis . '>';
             } elseif (isset($item['radio']) && is_array($item['radio'])) {
                 $rId = isset($item['radio']['id']) ? $item['radio']['id'] : '';
                 $rNome = isset($item['radio']['nome']) ? $item['radio']['nome'] : '';
@@ -6185,7 +6371,7 @@ class Bootstrap
         $ultima = $qtdpag - 1;
         $atual = 0;
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 $atual = $key;
             }
         }
@@ -6213,7 +6399,7 @@ class Bootstrap
         }
         
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 if ($botaoap) {
                     if ($key == 0) {
                         $classeant = ' disabled';
@@ -6411,7 +6597,7 @@ class Bootstrap
         $atual = 0;
         $ultima = $qtdpag - 1;
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 $atual = $key;
             }
         }
@@ -6439,7 +6625,7 @@ class Bootstrap
         }
         
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 if ($key == 0) {
                     $classeant = ' disabled';
                     if ($simbolo) {
@@ -6614,14 +6800,17 @@ class Bootstrap
         $linku = '';
         $linkp = '';
         $qtdpag = count($paginas);
+        $atual = 0;
+        $classepri = '';
+        $classeult = '';
         $ultima = $qtdpag - 1;
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 $atual = $key;
             }
         }
         foreach ($paginas as $key => $pagina) {
-            if ($pagina['atual']) {
+            if (!empty($pagina['atual'])) {
                 if ($key == 0) {
                     $classepri = ' disabled';
                     $classeant = ' disabled';
@@ -7029,10 +7218,12 @@ class Bootstrap
      * Gera o script JavaScript inline essencial para leitura do localStorage e prevenção de tela branca antes do carregamento do DOM.
      *
      * @param bool $incluiTagsScript Se true, envolve o código JavaScript na tag <script>.
+     * @param string $id ID base do botão seletor de tema (padrão 'bd-theme').
      * @return string Código JavaScript para manipulação imediata do tema via data-bs-theme.
      */
-    public function scriptThemeToggle($incluiTagsScript = true)
+    public function scriptThemeToggle($incluiTagsScript = true, $id = 'bd-theme')
     {
+        $idSelector = ltrim($id, '#');
         $js = <<<'JAVASCRIPT'
 (() => {
     'use strict';
@@ -7061,8 +7252,8 @@ class Bootstrap
     setTheme(getPreferredTheme());
 
     const showActiveTheme = (theme, focus = false) => {
-        const themeSwitcher = document.querySelector('#bd-theme');
-        const themeSwitcherText = document.querySelector('#bd-theme-text');
+        const themeSwitcher = document.querySelector('#__BS_THEME_ID__');
+        const themeSwitcherText = document.querySelector('#__BS_THEME_ID__-text');
         const activeThemeIcon = document.querySelector('.theme-icon-active use');
         const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`);
 
@@ -7143,6 +7334,8 @@ class Bootstrap
     }
 })();
 JAVASCRIPT;
+
+        $js = str_replace('__BS_THEME_ID__', $idSelector, $js);
 
         if ($incluiTagsScript) {
             return '<script>' . PHP_EOL . $js . PHP_EOL . '</script>' . PHP_EOL;
@@ -7242,7 +7435,7 @@ JAVASCRIPT;
 
         $saida = $svgSymbols . $html;
         if ($incluiScript) {
-            $saida .= $this->scriptThemeToggle(true);
+            $saida .= $this->scriptThemeToggle(true, $id);
         }
 
         return $saida;
@@ -7546,6 +7739,8 @@ JAVASCRIPT;
             'arrow-up' => 'arrow-up',
             'arrow-down' => 'arrow-down',
             'refresh' => 'arrow-repeat',
+            'new-window' => 'box-arrow-up-right',
+            'search' => 'search',
             'triangle-left' => 'caret-left-fill',
             'triangle-right' => 'caret-right-fill',
             'step-backward' => 'skip-backward-fill',

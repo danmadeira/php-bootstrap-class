@@ -511,8 +511,8 @@ Este projeto é distribuído sob os termos da licença **MIT**. Consulte o arqui
 ## 👨‍💻 Informações do Projeto
 
 * **Autor:** Daniel Madeira
-* **Versão:** 2.0
-* **Data:** 2026-10-24
+* **Versão:** 2.1
+* **Data:** 2026-10-25
 * **Licença:** MIT
 * **Repositório:** [https://github.com/danmadeira/php-bootstrap-class](https://github.com/danmadeira/php-bootstrap-class)
 
